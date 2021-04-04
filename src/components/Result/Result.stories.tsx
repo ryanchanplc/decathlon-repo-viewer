@@ -1,5 +1,4 @@
 import { Meta, Story } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import Result, { ResultProps } from './Result';
 
 export default {
@@ -15,7 +14,7 @@ ResultAll.args = {
   type: 'source',
   language: 'Typescript',
   topic: 'css',
-  searchKeywords: 'test',
+  searchKeyword: 'test',
 };
 
 export const ResultTypeOnly = Template.bind({});

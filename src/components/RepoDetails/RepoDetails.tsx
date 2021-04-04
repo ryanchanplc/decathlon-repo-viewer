@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Grid, Chip, Tooltip } from '@material-ui/core';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import CallSplitIcon from '@material-ui/icons/CallSplit';
@@ -66,47 +66,56 @@ const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
       )}
       {license && (
         <Grid item>
-          <ChipWithTooltip
-            color="secondary"
-            tooltip={license.name}
-            label={license.name}
-            size="small"
-            href={license.url}
-            clickable
-          />
+          <Tooltip title={license.name}>
+            {license.url ? (
+              <Chip
+                color="secondary"
+                label={license.name}
+                size="small"
+                component="a"
+                clickable
+                href={license.url}
+              />
+            ) : (
+              <Chip color="secondary" label={license.name} size="small" />
+            )}
+          </Tooltip>
         </Grid>
       )}
       {forkCount && (
         <Grid item>
-          <ChipWithTooltip
-            icon={<CallSplitIcon />}
-            color="secondary"
-            tooltip="Forks"
-            label={forkCount}
-            size="small"
-          />
+          <Tooltip title="Forks">
+            <Chip
+              icon={<CallSplitIcon />}
+              color="secondary"
+              label={forkCount}
+              size="small"
+            />
+          </Tooltip>
         </Grid>
       )}
       {issueCount && (
         <Grid item>
-          <ChipWithTooltip
-            icon={<ErrorOutlineIcon />}
-            color="secondary"
-            label={issueCount}
-            tooltip="Issue"
-            size="small"
-          />
+          <Tooltip title="Issue">
+            <Chip
+              icon={<ErrorOutlineIcon />}
+              color="secondary"
+              label={issueCount}
+              size="small"
+            />
+          </Tooltip>
         </Grid>
       )}
       {starCount && (
         <Grid item>
-          <ChipWithTooltip
-            icon={<StarBorderIcon />}
-            color="secondary"
-            tooltip="Star"
-            label={starCount}
-            size="small"
-          />
+          <Tooltip title="Star">
+            <Chip
+              icon={<StarBorderIcon />}
+              color="secondary"
+              label={starCount}
+              size="small"
+            />
+          </Tooltip>
         </Grid>
       )}
     </Grid>

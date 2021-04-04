@@ -18,7 +18,7 @@ const Filter = (props: FilterProps): JSX.Element => {
   ];
 
   return (
-    <form>
+    <form onSubmit={() => onFilter({})}>
       <Grid container direction="row" spacing={2}>
         <Grid item sm={4} xs={12}>
           <Controller

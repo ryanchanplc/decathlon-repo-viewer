@@ -48,7 +48,8 @@
     "max-classes-per-file": 1,
     "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0 }],
     "react/jsx-uses-react": "off", //react 17
-    "react/react-in-jsx-scope": "off" //react 17
+    "react/react-in-jsx-scope": "off", //react 17
+    "@typescript-eslint/no-explicit-any": 0
   },
   "settings": {
     "react": {

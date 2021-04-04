@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import ProfileDetails, { ProfileDetailsProps } from './ProfileDetails';
 
-const renderUI = (props: ProfileDetailsProp) =>
+const renderUI = (props: ProfileDetailsProps) =>
   render(<ProfileDetails {...props} />);
 
 const name = 'name';

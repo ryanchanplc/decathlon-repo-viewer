@@ -40,7 +40,7 @@ const Result = (props: ResultProps): JSX.Element => {
           <b>{topic}</b>
         </>
       )}
-      {searchKeywords && (
+      {searchKeyword && (
         <>
           {' matching '}
           <b>{searchKeyword}</b>

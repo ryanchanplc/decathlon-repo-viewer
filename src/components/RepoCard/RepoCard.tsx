@@ -5,13 +5,12 @@ import {
   makeStyles,
   createStyles,
   Grid,
-  Theme,
 } from '@material-ui/core';
 
 import RepoTopics, { RepoTopicsProps } from '../RepoTopics/RepoTopics';
 import RepoDetails, { RepoDetailsProps } from '../RepoDetails/RepoDetails';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       height: '100%',

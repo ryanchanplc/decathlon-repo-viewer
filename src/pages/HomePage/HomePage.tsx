@@ -4,8 +4,6 @@ import { grey } from '@material-ui/core/colors';
 import Header from '../../components/Header/Header';
 import RepoList from '../../components/RepoList/RepoList';
 import repos from '../../components/RepoCard/repo.json';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import Filter from '../../components/Filter/Filter';
 import Result from '../../components/Result/Result';
 
 const demoData = {
@@ -54,13 +52,11 @@ const HomePage: React.FC = () => (
           resultCount={2}
           language="Javascript"
           type="test"
-          searchKeywords="test"
+          searchKeyword="test"
           topic="test"
         />
       </Box>
       <Box p={2}>
-        {/* <SearchBar placeholder="Search" onSearch={console.log} />
-      <Filter onFilter={() => {}} /> */}
         <RepoList repos={repos} />
       </Box>
     </Container>
