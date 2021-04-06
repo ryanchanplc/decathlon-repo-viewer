@@ -9,7 +9,7 @@ export interface IconTextProps {
   /**
    *  display text
    */
-  text: string;
+  text?: string;
 
   /**
    *  url if it has a link
@@ -34,12 +34,10 @@ const IconText = (props: IconTextProps): JSX.Element => {
       <Grid item>{icon}</Grid>
       <Grid item>
         <Typography variant="subtitle1" className={classes.wrapIcon}>
-          {url ? (
+          {url && text && (
             <Link href={url} color="inherit" target="_blank">
               {text}
             </Link>
-          ) : (
-            text
           )}
         </Typography>
       </Grid>

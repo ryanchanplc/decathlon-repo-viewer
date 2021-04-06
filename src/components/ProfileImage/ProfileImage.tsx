@@ -1,4 +1,7 @@
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Box } from '@material-ui/core';
+import Skeleton from '@material-ui/lab/Skeleton';
+import LazyLoad from 'react-lazyload';
+import ProfileType from '../../types/ProfileType';
 
 const useStyles = makeStyles(() => ({
   image: {
@@ -6,23 +9,32 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export interface ProfileImageProps {
-  /**
-   * avatar image
-   */
-  avatarUrl?: string;
-}
+export type ProfileImageProps = Pick<ProfileType, 'avatar_url'>;
 
 const ProfileImage = (props: ProfileImageProps): JSX.Element => {
-  const { avatarUrl } = props;
+  const { avatar_url: avatarUrl } = props;
   const classes = useStyles();
 
-  return (
-    <img src={avatarUrl} alt="avatar" height="150" className={classes.image} />
+  return avatarUrl ? (
+    <LazyLoad height={150} width={150}>
+      <img
+        src={avatarUrl}
+        alt="avatar"
+        height="150"
+        width="150"
+        className={classes.image}
+      />
+    </LazyLoad>
+  ) : (
+    <Box width={150}>
+      <Skeleton
+        variant="rect"
+        className={classes.image}
+        width={150}
+        height={150}
+      />
+    </Box>
   );
 };
 
-ProfileImage.defaultProps = {
-  avatarUrl: 'https://via.placeholder.com/150',
-};
 export default ProfileImage;

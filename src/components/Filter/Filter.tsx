@@ -1,6 +1,8 @@
+import { useContext, useMemo, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
-import { useForm, Controller } from 'react-hook-form';
+import { useFormContext, Controller } from 'react-hook-form';
 import DropDownMenu from '../DropDownMenu/DropDownMenu';
+import { AppContext, Types } from '../../context/AppContext';
 
 export interface FilterProps {
   /**
@@ -10,55 +12,91 @@ export interface FilterProps {
 }
 
 const Filter = (props: FilterProps): JSX.Element => {
-  const { control } = useForm();
+  const { state } = useContext(AppContext);
   const { onFilter } = props;
-  const test = [
-    { id: 'test', label: 'TEST' },
-    { id: 'test2', label: 'TEST2' },
-  ];
+  const { control, getValues, setValue } = useFormContext();
+  const onSubmit = () => {
+    onFilter(getValues());
+  };
+
+  const typeOptions = useMemo(
+    () =>
+      Object.entries(Types).map((array: Array<string>) => ({
+        id: array[1],
+        label: array[1],
+      })),
+    []
+  );
 
   return (
-    <form onSubmit={() => onFilter({})}>
-      <Grid container direction="row" spacing={2}>
-        <Grid item sm={4} xs={12}>
-          <Controller
-            name="type"
-            render={({ field }) => (
-              <DropDownMenu id="type" label="Type" options={test} {...field} />
-            )}
-            control={control}
-          />
-        </Grid>
-        <Grid item sm={4} xs={12}>
-          <Controller
-            name="langagues"
-            render={({ field }) => (
+    <Grid container direction="row" spacing={2}>
+      <Grid item sm={4} xs={12}>
+        <Controller
+          name="type"
+          render={({ field }) => {
+            const { onChange, ...others } = field;
+            return (
               <DropDownMenu
-                id="languages"
-                label="Languages"
-                options={test}
-                {...field}
+                id="type"
+                label="Types"
+                options={typeOptions}
+                onChange={(e) => {
+                  onChange(e);
+                  onSubmit();
+                }}
+                {...others}
               />
-            )}
-            control={control}
-          />
-        </Grid>
-        <Grid item sm={4} xs={12}>
-          <Controller
-            name="topics"
-            render={({ field }) => (
-              <DropDownMenu
-                id="topics"
-                label="Topics"
-                options={test}
-                {...field}
-              />
-            )}
-            control={control}
-          />
-        </Grid>
+            );
+          }}
+          defaultValue={state.search.type}
+          control={control}
+        />
       </Grid>
-    </form>
+      <Grid item sm={4} xs={12}>
+        <Controller
+          name="topic"
+          render={({ field }) => {
+            const { onChange, ...others } = field;
+            return (
+              <DropDownMenu
+                id="topic"
+                label="Topics"
+                options={state.topicList}
+                onChange={(e) => {
+                  onChange(e);
+                  onSubmit();
+                }}
+                {...others}
+              />
+            );
+          }}
+          defaultValue={state.search.topic}
+          control={control}
+        />
+      </Grid>
+      <Grid item sm={4} xs={12}>
+        <Controller
+          name="language"
+          render={({ field }) => {
+            const { onChange, ...others } = field;
+            return (
+              <DropDownMenu
+                id="language"
+                label="Languages"
+                options={state.languageList}
+                onChange={(e) => {
+                  onChange(e);
+                  onSubmit();
+                }}
+                {...others}
+              />
+            );
+          }}
+          defaultValue={state.search.language}
+          control={control}
+        />
+      </Grid>
+    </Grid>
   );
 };
 

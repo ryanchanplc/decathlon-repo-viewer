@@ -95,18 +95,19 @@ const DropDownMenu: React.FC<DropDownMenuProps> = React.forwardRef(
             id: labelName,
           }}
         >
-          {options.map((option) => (
-            <MenuItem key={option.id} value={option.id}>
-              {multiple && (
-                <Checkbox
-                  checked={
-                    Array.isArray(value) && value.indexOf(option.id) > -1
-                  }
-                />
-              )}
-              <ListItemText primary={option.label} />
-            </MenuItem>
-          ))}
+          {options &&
+            options.map((option) => (
+              <MenuItem key={option.id} value={option.id}>
+                {multiple && (
+                  <Checkbox
+                    checked={
+                      Array.isArray(value) && value.indexOf(option.id) > -1
+                    }
+                  />
+                )}
+                <ListItemText primary={option.label} />
+              </MenuItem>
+            ))}
         </Select>
       </FormControl>
     );

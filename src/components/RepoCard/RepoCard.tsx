@@ -1,14 +1,18 @@
+import { useContext } from 'react';
 import {
   Card,
   CardContent,
   Typography,
+  Link,
   makeStyles,
   createStyles,
   Grid,
 } from '@material-ui/core';
-
-import RepoTopics, { RepoTopicsProps } from '../RepoTopics/RepoTopics';
-import RepoDetails, { RepoDetailsProps } from '../RepoDetails/RepoDetails';
+import RepoTopics from '../RepoTopics/RepoTopics';
+import RepoDetails from '../RepoDetails/RepoDetails';
+import RepoType from '../../types/RepoType';
+import { AppContext } from '../../context/AppContext';
+import { Search } from '../../context/Actions';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -17,25 +21,13 @@ const useStyles = makeStyles(() =>
     },
   })
 );
-interface RepoCardBaseProps {
-  /**
-   * name of the user/organization
-   */
-  name?: string;
 
-  /**
-   * description of the user/organization
-   */
-  description?: string | null;
-}
-
-export type RepoCardProps = RepoCardBaseProps &
-  RepoTopicsProps &
-  RepoDetailsProps;
+export type RepoCardProps = RepoType;
 
 const RepoCard = (props: RepoCardProps): JSX.Element => {
   const classes = useStyles();
-  const { name, description, topics, ...details } = props;
+  const { state, dispatch } = useContext(AppContext);
+  const { name, description, html_url: url, topics, ...details } = props;
   return (
     <Card variant="outlined" className={classes.root}>
       <CardContent>
@@ -48,7 +40,13 @@ const RepoCard = (props: RepoCardProps): JSX.Element => {
         >
           <Grid item>
             <Typography variant="h5" component="h2">
-              {name}
+              {url ? (
+                <Link href={url} target="_blank" rel="noreferrer">
+                  {name}
+                </Link>
+              ) : (
+                name
+              )}
             </Typography>
           </Grid>
           {description && (
@@ -59,7 +57,13 @@ const RepoCard = (props: RepoCardProps): JSX.Element => {
             </Grid>
           )}
           <RepoTopics topics={topics} />
-          <RepoDetails {...details} />
+          <RepoDetails
+            onClickLanguage={(language: string) => {
+              console.log(language);
+              Search(dispatch, { ...state.search, language }, state.repoList);
+            }}
+            {...details}
+          />
         </Grid>
       </CardContent>
     </Card>

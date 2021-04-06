@@ -1,24 +1,24 @@
+import { useContext, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
-import RepoCard, { RepoCardProps } from '../RepoCard/RepoCard';
+import RepoCard from '../RepoCard/RepoCard';
+import { AppContext } from '../../context/AppContext';
+import { getRepos } from '../../context/Actions';
 
-interface RepoListBaseProps {
-  id: number;
-}
-export interface RepoListProps {
-  /**
-   * repositories array
-   */
-  repos: Array<RepoListBaseProps & RepoCardProps>;
-}
-const RepoList = (props: RepoListProps): JSX.Element => {
-  const { repos } = props;
+const RepoList = (): JSX.Element => {
+  const { state, dispatch } = useContext(AppContext);
+
+  useEffect(() => {
+    getRepos(dispatch);
+  }, [dispatch]);
+
   return (
     <Grid container direction="column" alignItems="stretch" spacing={2}>
-      {repos.map((repo) => (
-        <Grid item sm={12} xs={12} key={repo.id}>
-          <RepoCard {...repo} />
-        </Grid>
-      ))}
+      {state.filteredRepoList &&
+        state.filteredRepoList.map((repo) => (
+          <Grid item sm={12} xs={12} key={repo.id}>
+            <RepoCard {...repo} />
+          </Grid>
+        ))}
     </Grid>
   );
 };

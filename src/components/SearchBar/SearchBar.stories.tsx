@@ -21,5 +21,4 @@ const Template: Story<SearchBarProps> = (args) => <SearchBar {...args} />;
 export const searchPlaceHolder = Template.bind({});
 searchPlaceHolder.args = {
   placeholder: 'Search',
-  onSearch: action(`On Search Clicked`),
 };

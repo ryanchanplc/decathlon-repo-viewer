@@ -3,19 +3,19 @@ import Result, { ResultProps } from './Result';
 
 const renderUI = (props: ResultProps) => render(<Result {...props} />);
 
-const resultCount = 0;
+const count = 0;
 const language = 'javascript';
-const searchKeyword = 'test';
+const keywords = 'test';
 const type = 'source';
 const topic = 'test';
 it('should render details', () => {
   const result = renderUI({
-    resultCount,
+    count,
     language,
     type,
     topic,
-    searchKeyword,
+    keywords,
   });
 
-  expect(result.getByText(resultCount)).toBeInTheDocument();
+  expect(result.getByText(count)).toBeInTheDocument();
 });

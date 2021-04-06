@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "*",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.1",
@@ -13,6 +14,7 @@
     "@types/react-dom": "^17.0.1",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
+    "axios": "^0.21.1",
     "eslint": "^7.21.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-config-prettier": "^8.1.0",
@@ -25,9 +27,16 @@
     "node-sass": "^5.0.0",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
+    "react-async-hook": "^3.6.2",
     "react-dom": "^17.0.1",
     "react-hook-form": "^7.0.0",
+    "react-lazyload": "^3.2.0",
+    "react-redux": "^7.2.3",
     "react-scripts": "^4.0.3",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
+    "swr": "^0.5.5",
     "typescript": "4.2.2",
     "web-vitals": "^1.1.0"
   },
@@ -87,7 +96,9 @@
     "@storybook/preset-create-react-app": "^3.1.7",
     "@storybook/react": "^6.2.2",
     "babel-loader": "^8.1.0",
+    "faker": "^5.5.2",
     "husky": "^6.0.0",
-    "lint-staged": "^10.5.4"
+    "lint-staged": "^10.5.4",
+    "miragejs": "^0.1.41"
   }
 }

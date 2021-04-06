@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import Header, { HeaderProps } from './Header';
+import Header from './Form';
 import { ProfileCardWithData } from '../ProfileCard/ProfileCard.stories';
 
 export default {
@@ -7,7 +7,7 @@ export default {
   component: Header,
 } as Meta;
 
-const Template: Story<HeaderProps> = (args) => <Header {...args} />;
+const Template: Story = (args) => <Header {...args} />;
 
 export const HeaderComponent = Template.bind({});
-HeaderComponent.args = { organization: { ...ProfileCardWithData.args } };
+HeaderComponent.args = {};

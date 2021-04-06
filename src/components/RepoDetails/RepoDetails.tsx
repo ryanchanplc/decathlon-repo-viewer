@@ -3,57 +3,49 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import CallSplitIcon from '@material-ui/icons/CallSplit';
 import ChipWithTooltip from '../ChipWithTooltip/ChipWithTooltip';
+import RepoType from '../../types/RepoType';
 
-export interface LicenseProps {
-  /**
-   * license name
-   */
-  name: string;
-
-  /**
-   * url of the license
-   */
-  url: string | null;
-}
-
-export interface RepoDetailsProps {
-  /**
-   *  coding language
-   */
-  language?: string | null;
-
-  /**
-   *  license
-   */
-  license?: LicenseProps | null;
-
-  /**
-   *  number of forks
-   */
-  forks_count?: number;
-
-  /**
-   *  number of open issue
-   */
-  open_issues_count?: number;
-
-  /**
-   *  number of stars
-   */
-  stargazers_count?: number;
-}
+export type RepoDetailsProps = {
+  onClickLanguage: (language: string) => void;
+} & Pick<
+  RepoType,
+  | 'language'
+  | 'license'
+  | 'forks_count'
+  | 'open_issues_count'
+  | 'stargazers_count'
+  | 'updated_at'
+>;
 
 const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
   const {
+    onClickLanguage,
     language,
     license,
     forks_count: forkCount,
     open_issues_count: issueCount,
     stargazers_count: starCount,
+    updated_at: updatedAt,
   } = props;
-
+  const getTimeDifference = (updateAt: string) => {
+    const update = new Date(updateAt);
+    const now = new Date();
+    const milliseconds = Math.abs(now.getTime() - update.getTime());
+    const days = milliseconds / (1000 * 3600 * 24);
+    const hour = milliseconds / 1000 / 3600;
+    if (hour < 24) return `Updated ${Math.floor(hour)} hours ago`;
+    if (days < 30) return `Updated ${Math.floor(days)} days ago`;
+    return `Updated on ${update.toISOString().split('T')[0]}`;
+  };
   return (
-    <Grid item container spacing={1} direction="row" justify="flex-start">
+    <Grid
+      item
+      container
+      spacing={1}
+      direction="row"
+      justify="flex-start"
+      alignItems="center"
+    >
       {language && (
         <Grid item>
           <ChipWithTooltip
@@ -61,6 +53,10 @@ const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
             color="secondary"
             size="small"
             label={language}
+            clickable
+            onClick={() => {
+              onClickLanguage(language);
+            }}
           />
         </Grid>
       )}
@@ -75,6 +71,8 @@ const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
                 component="a"
                 clickable
                 href={license.url}
+                target="_blank"
+                rel="noreferrer"
               />
             ) : (
               <Chip color="secondary" label={license.name} size="small" />
@@ -82,7 +80,7 @@ const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
           </Tooltip>
         </Grid>
       )}
-      {forkCount && (
+      {forkCount !== null && (
         <Grid item>
           <Tooltip title="Forks">
             <Chip
@@ -94,7 +92,7 @@ const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
           </Tooltip>
         </Grid>
       )}
-      {issueCount && (
+      {issueCount !== null && (
         <Grid item>
           <Tooltip title="Issue">
             <Chip
@@ -106,7 +104,7 @@ const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
           </Tooltip>
         </Grid>
       )}
-      {starCount && (
+      {starCount !== null && (
         <Grid item>
           <Tooltip title="Star">
             <Chip
@@ -116,6 +114,16 @@ const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
               size="small"
             />
           </Tooltip>
+        </Grid>
+      )}
+
+      {updatedAt && (
+        <Grid item>
+          <ChipWithTooltip
+            color="primary"
+            size="small"
+            label={getTimeDifference(updatedAt)}
+          />
         </Grid>
       )}
     </Grid>

@@ -9,5 +9,5 @@ export default {
 const Template: Story<ProfileImageProps> = (args) => <ProfileImage {...args} />;
 export const ProfileImageWithImage = Template.bind({});
 ProfileImageWithImage.args = {
-  avatarUrl: 'https://avatars.githubusercontent.com/u/33066690?v=4',
+  avatar_url: 'https://avatars.githubusercontent.com/u/33066690?v=4',
 };

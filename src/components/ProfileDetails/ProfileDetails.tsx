@@ -2,42 +2,39 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
 import EmailIcon from '@material-ui/icons/Email';
 import TwitterIcon from '@material-ui/icons/Twitter';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, Box } from '@material-ui/core';
+import Skeleton from '@material-ui/lab/Skeleton';
 import IconText from '../IconText/IconText';
+import ProfileType from '../../types/ProfileType';
 
-export interface ProfileDetailsProps {
-  /**
-   * description of the organization/user
-   */
-  description: string;
+export type ProfileDetailsProps = {
+  isLoading: boolean;
+} & Omit<ProfileType, 'avatar_url'>;
 
-  /**
-   * name of the organization/user
-   */
-  name: string;
-
-  /**
-   * location of the organization/user
-   */
-  location: string;
-
-  /**
-   * blog url of the organization/user
-   */
-  blog: string;
-
-  /**
-   * twitter username of the organization/user
-   */
-  twitterUsername: string;
-  /**
-   *  email of the organization/user
-   */
-  email: string;
+interface ItemWrapperProps {
+  isLoading: boolean;
 }
+const ItemWrapper: React.FC<ItemWrapperProps> = (props): JSX.Element => {
+  const { isLoading, children } = props;
+  return isLoading ? (
+    <Box width={1}>
+      <Skeleton variant="text" />{' '}
+    </Box>
+  ) : (
+    <>{children}</>
+  );
+};
 
 const ProfileDetails = (props: ProfileDetailsProps): JSX.Element => {
-  const { description, name, location, blog, twitterUsername, email } = props;
+  const {
+    description,
+    name,
+    location,
+    blog,
+    twitter_username: twitterUsername,
+    email,
+    isLoading,
+  } = props;
   return (
     <Grid
       item
@@ -47,28 +44,26 @@ const ProfileDetails = (props: ProfileDetailsProps): JSX.Element => {
       justify="flex-start"
       spacing={1}
     >
-      <Grid item>
-        <Typography component="h5" variant="h5" align="left">
-          {name}
-        </Typography>
-      </Grid>
-      {description && (
+      <ItemWrapper isLoading={isLoading}>
+        <Grid item>
+          <Typography component="h5" variant="h5" align="left">
+            {name}
+          </Typography>
+        </Grid>
+      </ItemWrapper>
+      <ItemWrapper isLoading={isLoading}>
         <Grid item>
           <Typography variant="subtitle1">{description}</Typography>
         </Grid>
-      )}
-      <Grid item container direction="row" spacing={1}>
-        {location && (
+      </ItemWrapper>
+      <ItemWrapper isLoading={isLoading}>
+        <Grid item container direction="row" spacing={1}>
           <Grid item>
             <IconText text={location} icon={<LocationOnIcon />} />
           </Grid>
-        )}
-        {blog && (
           <Grid item>
             <IconText text={blog} url={blog} icon={<LinkIcon />} />
           </Grid>
-        )}
-        {twitterUsername && (
           <Grid item>
             <IconText
               text={twitterUsername}
@@ -76,8 +71,6 @@ const ProfileDetails = (props: ProfileDetailsProps): JSX.Element => {
               icon={<TwitterIcon />}
             />
           </Grid>
-        )}
-        {email && (
           <Grid item>
             <IconText
               text={email}
@@ -85,8 +78,8 @@ const ProfileDetails = (props: ProfileDetailsProps): JSX.Element => {
               icon={<EmailIcon />}
             />
           </Grid>
-        )}
-      </Grid>
+        </Grid>
+      </ItemWrapper>
     </Grid>
   );
 };

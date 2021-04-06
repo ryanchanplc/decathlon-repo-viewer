@@ -16,6 +16,7 @@ ProfileDetailsWithData.args = {
   description: '',
   location: 'Decathlon',
   email: 'oss@decathlon.com',
-  twitterUsername: 'decathlondev',
+  twitter_username: 'decathlondev',
   blog: 'https://developers.decathlon.com',
+  isLoading: false,
 };

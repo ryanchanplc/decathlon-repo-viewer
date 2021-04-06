@@ -4,7 +4,7 @@ export interface ResultProps {
   /**
    * search/filtered result count
    */
-  resultCount: number;
+  count: number;
 
   /**
    * result repo type
@@ -24,15 +24,15 @@ export interface ResultProps {
   /**
    * searchKeywords
    */
-  searchKeyword: string;
+  keywords: string;
 }
 
 const Result = (props: ResultProps): JSX.Element => {
-  const { resultCount, type, language, topic, searchKeyword } = props;
+  const { count, type, language, topic, keywords } = props;
 
   return (
     <Typography variant="body2" component="p">
-      <b>{resultCount}</b> {'result for '}
+      <b>{count}</b> {'result for '}
       {type && <b>{type}</b>} {'respository '}
       {topic && (
         <>
@@ -40,10 +40,10 @@ const Result = (props: ResultProps): JSX.Element => {
           <b>{topic}</b>
         </>
       )}
-      {searchKeyword && (
+      {keywords && (
         <>
           {' matching '}
-          <b>{searchKeyword}</b>
+          <b>{keywords}</b>
         </>
       )}
       {language && (
