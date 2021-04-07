@@ -1,35 +1,28 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { Grid } from '@material-ui/core';
 import { useForm, FormProvider } from 'react-hook-form';
-import Filter from '../Filter/Filter';
 import SearchBar from '../SearchBar/SearchBar';
 import { AppContext } from '../../context/AppContext';
-import { Search, Sort } from '../../context/Actions';
+import { SetQueryParams } from '../../context/Actions';
 import Result from '../Result/Result';
 import Sorting from '../Sorting/Sorting';
 
 const Form = (): JSX.Element => {
   const methods = useForm();
-  const { getValues, setValue } = methods;
+  const { getValues } = methods;
 
   const { state, dispatch } = useContext(AppContext);
-  const onSearch = (data: any) => {
-    Search(dispatch, data, state.repoList);
+
+  const handleSubmit = (data: any) => {
+    SetQueryParams(dispatch, data);
   };
-  const onSort = (data: any) => {
-    Sort(dispatch, data.sort, state.repoList);
-  };
-  useEffect(() => {
-    Object.entries(state.search).forEach(([key, value]) =>
-      setValue(key, value)
-    );
-  }, [setValue, state.search]);
+
   return (
     <FormProvider {...methods}>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          onSearch(getValues());
+          handleSubmit(getValues());
         }}
         name="searchForm"
         id="searchForm"
@@ -40,9 +33,14 @@ const Form = (): JSX.Element => {
               <SearchBar placeholder="Search Name" />
             </Grid>
             <Grid item sm={8} xs={12}>
-              <Filter
+              {/* <Filter
                 onFilter={() => {
                   onSearch(getValues());
+                }}
+              /> */}
+              <Sorting
+                onSort={() => {
+                  handleSubmit(getValues());
                 }}
               />
             </Grid>
@@ -55,16 +53,16 @@ const Form = (): JSX.Element => {
             alignItems="center"
             justify="flex-end"
           >
-            <Grid item xs={10}>
-              <Result count={state.filteredRepoList.length} {...state.search} />
+            <Grid item xs={12}>
+              <Result count={state.repos?.total_count} {...state.queryParams} />
             </Grid>
-            <Grid item xs={2}>
+            {/* <Grid item xs={2}>
               <Sorting
                 onSort={() => {
-                  onSort(getValues());
+                  handleSubmit(getValues());
                 }}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
       </form>

@@ -6,11 +6,23 @@ export interface Error {
   status: any;
   message: string;
 }
+
+export const perPageTypes = {
+  '10': '10',
+  '25': '25',
+  '50': '50',
+};
 export const SortTypes = {
-  ASC: 'A-Z',
-  DESC: 'Z-A',
-  LATEST: 'Latest',
-  OLDEST: 'Oldest',
+  bestmatch: 'Bestmatch',
+  stars: 'Stars',
+  forks: 'Forks',
+  'help-wanted-issue': 'help-wanted-issues',
+  updated: 'Updated',
+};
+
+export const OrderTypes = {
+  asc: 'ASC',
+  desc: 'DESC',
 };
 export const Types = {
   ALL: 'All',
@@ -29,51 +41,49 @@ export interface OptionsState {
   id: string;
   label: string;
 }
-export interface SearchState {
-  keywords: string;
-  type: string;
-  topic: string;
-  language: string;
+
+export interface QueryParams {
+  keywords?: string;
+  type?: string;
+  topic?: string;
+  language?: string;
+  license?: string;
+  user?: string;
   sort: SortState;
+  page: number;
+  per_page: string;
+  order: OrderState;
 }
+export type OrderState = typeof OrderTypes.asc | typeof OrderTypes.desc;
 export type SortState =
-  | typeof SortTypes.ASC
-  | typeof SortTypes.DESC
-  | typeof SortTypes.LATEST
-  | typeof SortTypes.OLDEST;
+  | typeof SortTypes.stars
+  | typeof SortTypes.forks
+  | typeof SortTypes['help-wanted-issue']
+  | typeof SortTypes.updated
+  | typeof SortTypes.bestmatch;
+export interface RepoState {
+  total_count: number;
+  items: Array<RepoType>;
+}
 export interface AppState {
-  search: SearchState;
-  languageList: Array<OptionsState>;
-  typeList: Array<OptionsState>;
-  topicList: Array<OptionsState>;
+  queryParams: QueryParams | null;
   profile: ProfileType | null;
-  repoList: Array<RepoType>;
-  filteredRepoList: Array<RepoType>;
+  repos: RepoState | null;
   loading: boolean;
   error: Error | null;
 }
 export const initialState: AppState = {
-  search: {
-    keywords: '',
-    type: 'All',
-    topic: 'All',
-    language: 'All',
-    sort: SortTypes.ASC,
+  queryParams: {
+    user: 'decathlon',
+    page: 1,
+    per_page: Object.keys(perPageTypes)[0],
+    sort: Object.keys(SortTypes)[0],
+    order: Object.keys(OrderTypes)[0],
   },
-  languageList: [],
-  typeList: [],
-  topicList: [],
   profile: null,
-  repoList: [],
-  filteredRepoList: [],
+  repos: null,
   loading: false,
   error: null,
 };
 
-export const AppContext = createContext<{
-  state: AppState;
-  dispatch: React.Dispatch<any>;
-}>({
-  state: initialState,
-  dispatch: () => null,
-});
+export const AppContext = createContext<any>({});

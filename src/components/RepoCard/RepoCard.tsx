@@ -12,7 +12,7 @@ import RepoTopics from '../RepoTopics/RepoTopics';
 import RepoDetails from '../RepoDetails/RepoDetails';
 import RepoType from '../../types/RepoType';
 import { AppContext } from '../../context/AppContext';
-import { Search } from '../../context/Actions';
+import { SetQueryParams } from '../../context/Actions';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -59,8 +59,7 @@ const RepoCard = (props: RepoCardProps): JSX.Element => {
           <RepoTopics topics={topics} />
           <RepoDetails
             onClickLanguage={(language: string) => {
-              console.log(language);
-              Search(dispatch, { ...state.search, language }, state.repoList);
+              SetQueryParams(dispatch, { ...state.queryParams, language });
             }}
             {...details}
           />

@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core';
 import ChipWithTooltip from '../ChipWithTooltip/ChipWithTooltip';
 import RepoType from '../../types/RepoType';
 import { AppContext } from '../../context/AppContext';
-import { Search } from '../../context/Actions';
+import { SetQueryParams } from '../../context/Actions';
 
 export type RepoTopicsProps = Pick<RepoType, 'topics'>;
 
@@ -11,7 +11,7 @@ const RepoTopics = (props: RepoTopicsProps): JSX.Element => {
   const { topics } = props;
   const { state, dispatch } = useContext(AppContext);
   const handleClick = (topic: string) => {
-    Search(dispatch, { ...state.search, topic }, state.repoList);
+    SetQueryParams(dispatch, { ...state.queryParams, topic });
   };
   return (
     <>

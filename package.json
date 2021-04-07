@@ -32,6 +32,8 @@
     "react-hook-form": "^7.0.0",
     "react-lazyload": "^3.2.0",
     "react-redux": "^7.2.3",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
@@ -56,8 +58,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
-      "npm run lint",
-      "npm run test:staged"
+      "npm run lint"
     ],
     "*.{ts,tsx,js,jsx,json}": [
       "npm run prettify"
@@ -95,6 +96,8 @@
     "@storybook/node-logger": "^6.2.2",
     "@storybook/preset-create-react-app": "^3.1.7",
     "@storybook/react": "^6.2.2",
+    "@types/react-router": "^5.1.13",
+    "@types/react-router-dom": "^5.1.7",
     "babel-loader": "^8.1.0",
     "faker": "^5.5.2",
     "husky": "^6.0.0",
