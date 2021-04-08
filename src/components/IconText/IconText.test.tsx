@@ -7,9 +7,7 @@ const url = 'https://www.google.com';
 const renderUI = (props: IconTextProps) => render(<IconText {...props} />);
 
 it('should render only text and icon', () => {
-  const iconText = renderUI({ text, icon: <ErrorOutlineIcon /> });
-
-  //expect(iconText.getByText(text)).toBeInTheDocument();
+  // const iconText = renderUI({ text, icon: <ErrorOutlineIcon /> });
   expect(document.querySelector('.MuiSvgIcon-root')).toBeTruthy();
 });
 

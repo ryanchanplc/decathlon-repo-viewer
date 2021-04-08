@@ -10,7 +10,7 @@ const Template: Story<RepoDetailsProps> = (args) => <RepoDetails {...args} />;
 export const RepoDetailsWithData = Template.bind({});
 RepoDetailsWithData.args = {
   language: 'Javascript',
-  license: { name: 'Other', url: null },
+  license: { name: 'Other', url: null, key: '' },
   forks_count: 1,
   open_issues_count: 2,
   stargazers_count: 3,

@@ -1,62 +1,121 @@
+import { useContext } from 'react';
 import { Typography } from '@material-ui/core';
+import ChipWithTooltip from '../ChipWithTooltip/ChipWithTooltip';
+import { AppContext, starsTypes, forksTypes } from '../../context/AppContext';
+import { SetQueryParams } from '../../context/Actions';
 
-export interface ResultProps {
-  /**
-   * search/filtered result count
-   */
-  count: number;
+const Result = (): JSX.Element => {
+  const { state, dispatch } = useContext(AppContext);
 
-  /**
-   * result repo type
-   */
-  type: string;
+  const {
+    type,
+    language,
+    topic,
+    keywords,
+    license,
+    stars,
+    forks,
+    per_page: perPage,
+  } = state.queryParams;
 
-  /**
-   * result repo language
-   */
-  language: string;
-
-  /**
-   * result repo type
-   */
-  topic: string;
-
-  /**
-   * searchKeywords
-   */
-  keywords: string;
-}
-
-const Result = (props: ResultProps): JSX.Element => {
-  const { count, type, language, topic, keywords } = props;
-
+  const handDelete = (value: Record<string, unknown>) => {
+    SetQueryParams(dispatch, { ...state.queryParams, ...value });
+  };
   return (
-    <Typography variant="body2" component="p">
-      <b>{count}</b> {'result for '}
-      {type && <b>{type}</b>} {'respository '}
+    <>
+      <Typography variant="body2" component="span">
+        <b>{state.repos?.total_count}</b> {'result for '}
+      </Typography>
+      {type && (
+        <ChipWithTooltip
+          variant="outlined"
+          color="secondary"
+          size="small"
+          label={type}
+          onDelete={() => {
+            handDelete({ type: '' });
+          }}
+        />
+      )}
+      <Typography variant="body2" component="span">
+        {' respository '}
+      </Typography>
       {topic && (
         <>
-          {' with topic '}
-          <b>{topic}</b>
+          <Typography variant="body2" component="span">
+            {' with topic '}
+          </Typography>
+          <ChipWithTooltip
+            variant="outlined"
+            color="secondary"
+            size="small"
+            label={topic}
+            onDelete={() => handDelete({ topic: '' })}
+          />
         </>
       )}
       {keywords && (
         <>
-          {' matching '}
-          <b>{keywords}</b>
+          <Typography variant="body2" component="span">
+            {' matching '}
+            <b>{keywords}</b>
+          </Typography>
         </>
       )}
       {language && (
         <>
-          {' written in '}
-          <b>{language}</b>
+          <Typography variant="body2" component="span">
+            {' written in '}
+          </Typography>
+          <ChipWithTooltip
+            variant="outlined"
+            color="secondary"
+            size="small"
+            label={language}
+            onDelete={() => handDelete({ language: '' })}
+          />
         </>
       )}
-    </Typography>
+      {license && (
+        <>
+          <Typography variant="body2" component="span">
+            {' with license '}
+          </Typography>
+          <ChipWithTooltip
+            variant="outlined"
+            color="secondary"
+            size="small"
+            label={license.name}
+            onDelete={() => handDelete({ license: null })}
+          />
+        </>
+      )}
+      {(stars || forks) && (
+        <Typography variant="body2" component="span">
+          {' that have '}
+        </Typography>
+      )}
+      {stars && (
+        <Typography variant="body2" component="span">
+          <b>{starsTypes[stars]}</b> stars
+        </Typography>
+      )}
+      {stars && forks && (
+        <Typography variant="body2" component="span">
+          {' and '}
+        </Typography>
+      )}
+      {forks && (
+        <Typography variant="body2" component="span">
+          <b>{forksTypes[forks]}</b> forks
+        </Typography>
+      )}
+      {perPage && (
+        <Typography variant="body2" component="span">
+          (Showing <b> {perPage}</b> per page)
+        </Typography>
+      )}
+    </>
   );
-};
-
-Result.defaultProps = {
-  resultCount: 0,
 };
 export default Result;

@@ -18,7 +18,7 @@ const ProfileCard = (): JSX.Element => {
     <Box display="flex" flexDirection="row" alignItems="center">
       <ProfileImage avatar_url={avatarUrl} />
       <Box p={2} width={1}>
-        <ProfileDetails isLoading={state.loading} {...details} />
+        <ProfileDetails isLoading={state.isProfileLoading} {...details} />
       </Box>
     </Box>
   );

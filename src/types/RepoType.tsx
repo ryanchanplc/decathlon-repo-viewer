@@ -4,6 +4,7 @@ export interface LicenseType {
    */
   name: string;
 
+  key: string;
   /**
    * url of the license
    */

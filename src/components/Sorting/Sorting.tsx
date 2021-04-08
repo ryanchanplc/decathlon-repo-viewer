@@ -1,18 +1,21 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useMemo, useCallback } from 'react';
 
-import { useFormContext, Controller } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { Grid } from '@material-ui/core';
 import {
   AppContext,
   SortTypes,
   OrderTypes,
   perPageTypes,
+  forksTypes,
+  starsTypes,
 } from '../../context/AppContext';
-import DropDownMenu from '../DropDownMenu/DropDownMenu';
+import ControlledSelect from '../ControlledSelect/ControlledSelect';
 
 interface SortingProps {
   onSort: (data: any) => void;
 }
+
 const Sorting = (props: SortingProps): JSX.Element => {
   const { state } = useContext(AppContext);
   const { onSort } = props;
@@ -21,96 +24,83 @@ const Sorting = (props: SortingProps): JSX.Element => {
   const onSubmit = () => {
     if (onSort) onSort(getValues());
   };
-  const sortOptions = useMemo(
-    () =>
-      Object.entries(SortTypes).map((array: Array<string>) => ({
-        id: array[0],
-        label: array[1],
-      })),
-    []
-  );
-  const orderOptions = useMemo(
-    () =>
-      Object.entries(OrderTypes).map((array: Array<string>) => ({
-        id: array[0],
-        label: array[1],
-      })),
-    []
-  );
-  const pageOptions = useMemo(
-    () =>
-      Object.entries(perPageTypes).map((array: Array<string>) => ({
-        id: array[0],
-        label: array[1],
-      })),
-    []
-  );
+
+  const getOptions = (types: Record<string, string>) =>
+    Object.entries(types).map((array: Array<string>) => ({
+      id: array[0],
+      label: array[1],
+    }));
+
+  const sortOptions = useMemo(() => getOptions(SortTypes), []);
+  const orderOptions = useMemo(() => getOptions(OrderTypes), []);
+  const pageOptions = useMemo(() => getOptions(perPageTypes), []);
+  const forksOptions = useMemo(() => getOptions(forksTypes), []);
+  const starsOptions = useMemo(() => getOptions(starsTypes), []);
 
   return (
     <Grid item container direction="row" spacing={2}>
-      <Grid item xs>
-        <Controller
+      <Grid item xs={12} sm={4}>
+        <ControlledSelect
           name="sort"
-          render={({ field }) => {
-            const { onChange, ...others } = field;
-            return (
-              <DropDownMenu
-                id="sort"
-                label="Sort"
-                options={sortOptions}
-                onChange={(e) => {
-                  onChange(e);
-                  onSubmit();
-                }}
-                {...others}
-              />
-            );
+          id="sort"
+          label="Sort"
+          options={sortOptions}
+          handleChange={() => {
+            onSubmit();
           }}
           defaultValue={state.queryParams.sort}
           control={control}
         />
       </Grid>
-      <Grid item xs>
-        <Controller
+      <Grid item xs={12} sm={2}>
+        <ControlledSelect
           name="order"
-          render={({ field }) => {
-            const { onChange, ...others } = field;
-            return (
-              <DropDownMenu
-                id="order"
-                label="Order"
-                options={orderOptions}
-                onChange={(e) => {
-                  onChange(e);
-                  onSubmit();
-                }}
-                {...others}
-              />
-            );
+          id="order"
+          label="Order"
+          options={orderOptions}
+          handleChange={() => {
+            onSubmit();
           }}
           defaultValue={state.queryParams.order}
           control={control}
         />
       </Grid>
-      <Grid item xs>
-        <Controller
+      <Grid item xs={12} sm={2}>
+        <ControlledSelect
           name="per_page"
-          render={({ field }) => {
-            const { onChange, ...others } = field;
-            return (
-              <DropDownMenu
-                id="per_page"
-                label="Items Per Page"
-                options={pageOptions}
-                onChange={(e) => {
-                  onChange(e);
-                  onSubmit();
-                }}
-                {...others}
-              />
-            );
+          id="per_page"
+          label="Items Per Page"
+          options={pageOptions}
+          handleChange={() => {
+            onSubmit();
           }}
           defaultValue={state.queryParams.per_page}
+          control={control}
+        />
+      </Grid>
+      <Grid item xs={12} sm={2}>
+        <ControlledSelect
+          name="forks"
+          id="forks"
+          label="Forks"
+          options={forksOptions}
+          handleChange={() => {
+            onSubmit();
+          }}
+          defaultValue={state.queryParams.forks}
+          control={control}
+        />
+      </Grid>
+      <Grid item xs={12} sm={2}>
+        <ControlledSelect
+          name="stars"
+          id="stars"
+          label="Stars"
+          options={starsOptions}
+          handleChange={() => {
+            onSubmit();
+          }}
+          defaultValue={state.queryParams.stars}
           control={control}
         />
       </Grid>

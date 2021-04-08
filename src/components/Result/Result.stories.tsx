@@ -1,12 +1,12 @@
 import { Meta, Story } from '@storybook/react';
-import Result, { ResultProps } from './Result';
+import Result from './Result';
 
 export default {
   title: 'Result/Result',
   component: Result,
 } as Meta;
 
-const Template: Story<ResultProps> = (args) => <Result {...args} />;
+const Template: Story = (args) => <Result {...args} />;
 
 export const ResultAll = Template.bind({});
 ResultAll.args = {

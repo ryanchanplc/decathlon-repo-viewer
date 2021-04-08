@@ -12,6 +12,33 @@ type AppRegistry = Registry<
   }
 >;
 type AppSchema = Schema<AppRegistry>;
+
+const checkArray = (array: any, value: any) =>
+  value && value !== '' ? array?.includes(value) : true;
+
+const checkValue = (item: any, value: any) =>
+  value && value !== '' ? item === value : true;
+const checkRange = (item: number, value: string) => {
+  if (!value || value === '') return true;
+  const isRange = value.includes('..');
+  const isLarger = value.includes('>');
+  const isSmaller = value.includes('<');
+  if (isRange) {
+    const minMax = value.split('..');
+    return item > parseInt(minMax[0]) && item < parseInt(minMax[1]);
+  }
+  if (isLarger) {
+    const number = value.split('>');
+
+    return item > parseInt(number[1]);
+  }
+  if (isSmaller) {
+    const number = value.split('<');
+    return item < parseInt(number[1]);
+  }
+
+  return true;
+};
 export default function makeServer({ environment = 'test' } = {}): any {
   return createServer({
     environment,
@@ -25,11 +52,21 @@ export default function makeServer({ environment = 'test' } = {}): any {
           name: faker.name.findName(),
           description: faker.commerce.productDescription(),
           html_url: faker.internet.url(),
-          stargazers_count: faker.datatype.number(),
+          stargazers_count: faker.datatype.number({
+            min: 0,
+            max: 200,
+          }),
           language: faker.random.word(),
-          forks_count: faker.datatype.number(),
+          forks_count: faker.datatype.number({
+            min: 0,
+            max: 200,
+          }),
           open_issues_count: faker.datatype.number(),
-          license: { name: faker.random.word(), url: faker.internet.url() },
+          license: {
+            name: faker.random.word(),
+            url: faker.internet.url(),
+            key: faker.random.word(),
+          },
           topics: [...Array(Math.floor(Math.random() * 10))].map(() =>
             faker.random.word()
           ),
@@ -58,40 +95,34 @@ export default function makeServer({ environment = 'test' } = {}): any {
         const limit = parseInt(perPage);
         const start = index * limit;
         const end = start + limit;
+        const query: Record<string, string> = {
+          keywords: '',
+          language: '',
+          topic: '',
+          license: '',
+          forks: '',
+          stars: '',
+        };
 
-        let keywords = '';
-        let language = '';
-        let topic = '';
         q.split(' ').forEach((element) => {
           const type = element.split(':');
-
-          if (type.length === 1) [keywords] = type;
+          if (type.length === 1) [query.keywords] = type;
           else {
-            switch (type[0]) {
-              case 'language':
-                [, language] = type;
-                break;
-              case 'topic':
-                [, topic] = type;
-                break;
-              default:
-            }
+            [, query[type[0]]] = type;
           }
         });
 
         const filtered = schema
           .all('repo')
-
-          .models.filter((item) => {
-            const foundKeywords =
-              keywords !== '' ? item.name?.includes(keywords) : true;
-            const foundLang =
-              language && language !== '' ? item.language === language : true;
-            const foundTopic =
-              topic && topic !== '' ? item.topics?.includes(topic) : true;
-
-            return foundKeywords && foundLang && foundTopic;
-          });
+          .models.filter(
+            (item) =>
+              checkArray(item.name, query.keywords) &&
+              checkValue(item.language, query.language) &&
+              checkArray(item.topics, query.topic) &&
+              checkValue(item.license?.key, query.license) &&
+              checkRange(item.stargazers_count, query.stars) &&
+              checkRange(item.forks_count, query.forks)
+          );
         return {
           total_count: filtered.length,
           items: filtered

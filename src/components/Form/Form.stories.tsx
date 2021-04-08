@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/react';
 import Header from './Form';
-import { ProfileCardWithData } from '../ProfileCard/ProfileCard.stories';
+//import { ProfileCardWithData } from '../ProfileCard/ProfileCard.stories';
 
 export default {
   title: 'Header/Header',

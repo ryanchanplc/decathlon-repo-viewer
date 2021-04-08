@@ -1,12 +1,23 @@
 import { createContext } from 'react';
 import ProfileType from '../types/ProfileType';
-import RepoType from '../types/RepoType';
+import RepoType, { LicenseType } from '../types/RepoType';
 
 export interface Error {
   status: any;
   message: string;
 }
-
+export const forksTypes: Record<string, string> = {
+  all: 'All',
+  '<50': '< 50',
+  '50..100': '50 - 100',
+  '>100': '> 100',
+};
+export const starsTypes: Record<string, string> = {
+  all: 'All',
+  '<10': '< 10',
+  '10..50': '10 - 50',
+  '>50': '> 50',
+};
 export const perPageTypes = {
   '10': '10',
   '25': '25',
@@ -47,12 +58,14 @@ export interface QueryParams {
   type?: string;
   topic?: string;
   language?: string;
-  license?: string;
+  license?: LicenseType;
   user?: string;
   sort: SortState;
   page: number;
   per_page: string;
   order: OrderState;
+  forks: string;
+  stars: string;
 }
 export type OrderState = typeof OrderTypes.asc | typeof OrderTypes.desc;
 export type SortState =
@@ -69,7 +82,8 @@ export interface AppState {
   queryParams: QueryParams | null;
   profile: ProfileType | null;
   repos: RepoState | null;
-  loading: boolean;
+  isProfileLoading: boolean;
+  isRepoLoading: boolean;
   error: Error | null;
 }
 export const initialState: AppState = {
@@ -79,10 +93,13 @@ export const initialState: AppState = {
     per_page: Object.keys(perPageTypes)[0],
     sort: Object.keys(SortTypes)[0],
     order: Object.keys(OrderTypes)[0],
+    forks: 'all',
+    stars: 'all',
   },
   profile: null,
   repos: null,
-  loading: false,
+  isProfileLoading: false,
+  isRepoLoading: false,
   error: null,
 };
 

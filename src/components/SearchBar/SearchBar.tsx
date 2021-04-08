@@ -1,5 +1,5 @@
 import { Controller, useFormContext } from 'react-hook-form';
-import { TextField, InputAdornment, IconButton } from '@material-ui/core';
+import { TextField, InputAdornment, Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
 export interface SearchBarProps {
@@ -25,9 +25,9 @@ const SearchBox = (props: SearchBarProps): JSX.Element => {
           InputProps={{
             endAdornment: (
               <InputAdornment position="start">
-                <IconButton type="submit" form="searchForm">
-                  <SearchIcon />
-                </IconButton>
+                <Button type="submit" form="searchForm">
+                  <SearchIcon /> Search
+                </Button>
               </InputAdornment>
             ),
           }}

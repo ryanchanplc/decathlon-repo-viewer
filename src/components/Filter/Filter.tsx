@@ -1,98 +1,57 @@
-import { useContext, useMemo, useEffect } from 'react';
-import { Grid } from '@material-ui/core';
-import { useFormContext, Controller } from 'react-hook-form';
-import DropDownMenu from '../DropDownMenu/DropDownMenu';
-import { AppContext, Types } from '../../context/AppContext';
+import { useContext, useMemo } from 'react';
 
-export interface FilterProps {
-  /**
-   *  trigger when filter is submitted
-   */
+import { useFormContext } from 'react-hook-form';
+import { Grid } from '@material-ui/core';
+import { AppContext, forksTypes, starsTypes } from '../../context/AppContext';
+import ControlledSelect from '../ControlledSelect/ControlledSelect';
+
+interface FilterProps {
   onFilter: (data: any) => void;
 }
 
 const Filter = (props: FilterProps): JSX.Element => {
   const { state } = useContext(AppContext);
   const { onFilter } = props;
-  const { control, getValues, setValue } = useFormContext();
+  const { control, getValues } = useFormContext();
+
   const onSubmit = () => {
-    onFilter(getValues());
+    if (onFilter) onFilter(getValues());
   };
 
-  const typeOptions = useMemo(
-    () =>
-      Object.entries(Types).map((array: Array<string>) => ({
-        id: array[1],
-        label: array[1],
-      })),
-    []
-  );
+  const getOptions = (types: Record<string, string>) =>
+    Object.entries(types).map((array: Array<string>) => ({
+      id: array[0],
+      label: array[1],
+    }));
+
+  const forksOptions = useMemo(() => getOptions(forksTypes), []);
+  const starsOptions = useMemo(() => getOptions(starsTypes), []);
 
   return (
-    <Grid container direction="row" spacing={2}>
-      <Grid item sm={4} xs={12}>
-        <Controller
-          name="type"
-          render={({ field }) => {
-            const { onChange, ...others } = field;
-            return (
-              <DropDownMenu
-                id="type"
-                label="Types"
-                options={typeOptions}
-                onChange={(e) => {
-                  onChange(e);
-                  onSubmit();
-                }}
-                {...others}
-              />
-            );
+    <Grid item container direction="row" spacing={2}>
+      <Grid item xs>
+        <ControlledSelect
+          name="forks"
+          id="forks"
+          label="Forks"
+          options={forksOptions}
+          handleChange={() => {
+            onSubmit();
           }}
-          defaultValue={state.search.type}
+          defaultValue={state.queryParams.forks}
           control={control}
         />
       </Grid>
-      <Grid item sm={4} xs={12}>
-        <Controller
-          name="topic"
-          render={({ field }) => {
-            const { onChange, ...others } = field;
-            return (
-              <DropDownMenu
-                id="topic"
-                label="Topics"
-                options={state.topicList}
-                onChange={(e) => {
-                  onChange(e);
-                  onSubmit();
-                }}
-                {...others}
-              />
-            );
+      <Grid item xs>
+        <ControlledSelect
+          name="stars"
+          id="stars"
+          label="Stars"
+          options={starsOptions}
+          handleChange={() => {
+            onSubmit();
           }}
-          defaultValue={state.search.topic}
-          control={control}
-        />
-      </Grid>
-      <Grid item sm={4} xs={12}>
-        <Controller
-          name="language"
-          render={({ field }) => {
-            const { onChange, ...others } = field;
-            return (
-              <DropDownMenu
-                id="language"
-                label="Languages"
-                options={state.languageList}
-                onChange={(e) => {
-                  onChange(e);
-                  onSubmit();
-                }}
-                {...others}
-              />
-            );
-          }}
-          defaultValue={state.search.language}
+          defaultValue={state.queryParams.stars}
           control={control}
         />
       </Grid>

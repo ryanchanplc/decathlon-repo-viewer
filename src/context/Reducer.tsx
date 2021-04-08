@@ -4,7 +4,7 @@ import { AppState, Action } from './AppContext';
 export default (state: AppState, action: Action): any => {
   switch (action.type) {
     case ActionTypes.SET_PROFILE:
-      return { ...state, profile: action.payload, loading: false };
+      return { ...state, profile: action.payload, isProfileLoading: false };
     case ActionTypes.SET_REPOS:
       return {
         ...state,
@@ -13,13 +13,20 @@ export default (state: AppState, action: Action): any => {
           total_count: action.payload.total_count,
           items: action.payload.items,
         },
-        loading: false,
+        isRepoLoading: false,
       };
 
-    case ActionTypes.SET_LOADING:
-      return { ...state, loading: action.payload };
+    case ActionTypes.SET_PROFILE_LOADING:
+      return { ...state, isProfileLoading: action.payload };
+    case ActionTypes.SET_REPO_LOADING:
+      return { ...state, isRepoLoading: action.payload };
     case ActionTypes.SET_ERROR:
-      return { ...state, error: action.payload };
+      return {
+        ...state,
+        error: action.payload,
+        isRepoLoading: false,
+        isProfileLoading: false,
+      };
     case ActionTypes.SET_QUERY:
       return {
         ...state,

@@ -26,7 +26,7 @@ export type RepoCardProps = RepoType;
 
 const RepoCard = (props: RepoCardProps): JSX.Element => {
   const classes = useStyles();
-  const { state, dispatch } = useContext(AppContext);
+
   const { name, description, html_url: url, topics, ...details } = props;
   return (
     <Card variant="outlined" className={classes.root}>
@@ -57,12 +57,7 @@ const RepoCard = (props: RepoCardProps): JSX.Element => {
             </Grid>
           )}
           <RepoTopics topics={topics} />
-          <RepoDetails
-            onClickLanguage={(language: string) => {
-              SetQueryParams(dispatch, { ...state.queryParams, language });
-            }}
-            {...details}
-          />
+          <RepoDetails {...details} />
         </Grid>
       </CardContent>
     </Card>

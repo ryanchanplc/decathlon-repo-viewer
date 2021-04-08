@@ -2,12 +2,13 @@ import { Grid, Chip, Tooltip } from '@material-ui/core';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import CallSplitIcon from '@material-ui/icons/CallSplit';
+import { useContext } from 'react';
 import ChipWithTooltip from '../ChipWithTooltip/ChipWithTooltip';
 import RepoType from '../../types/RepoType';
+import { AppContext } from '../../context/AppContext';
+import { SetQueryParams } from '../../context/Actions';
 
-export type RepoDetailsProps = {
-  onClickLanguage: (language: string) => void;
-} & Pick<
+export type RepoDetailsProps = Pick<
   RepoType,
   | 'language'
   | 'license'
@@ -19,7 +20,6 @@ export type RepoDetailsProps = {
 
 const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
   const {
-    onClickLanguage,
     language,
     license,
     forks_count: forkCount,
@@ -27,6 +27,11 @@ const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
     stargazers_count: starCount,
     updated_at: updatedAt,
   } = props;
+  const { state, dispatch } = useContext(AppContext);
+
+  const handleClick = (value: any) =>
+    SetQueryParams(dispatch, { ...state.queryParams, ...value });
+
   const getTimeDifference = (updateAt: string) => {
     const update = new Date(updateAt);
     const now = new Date();
@@ -55,29 +60,25 @@ const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
             label={language}
             clickable
             onClick={() => {
-              onClickLanguage(language);
+              handleClick({ language });
             }}
           />
         </Grid>
       )}
       {license && (
         <Grid item>
-          <Tooltip title={license.name}>
-            {license.url ? (
-              <Chip
-                color="secondary"
-                label={license.name}
-                size="small"
-                component="a"
-                clickable
-                href={license.url}
-                target="_blank"
-                rel="noreferrer"
-              />
-            ) : (
-              <Chip color="secondary" label={license.name} size="small" />
-            )}
-          </Tooltip>
+          <ChipWithTooltip
+            tooltip={license.name}
+            color="secondary"
+            label={license.name}
+            size="small"
+            clickable
+            onClick={() => {
+              handleClick({
+                license: { name: license.name, key: license.key },
+              });
+            }}
+          />
         </Grid>
       )}
       {forkCount !== null && (

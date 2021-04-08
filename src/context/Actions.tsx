@@ -7,17 +7,23 @@ const headers = {
   },
 };
 export const ActionTypes = {
-  SET_LOADING: ' SET_LOADING',
+  SET_PROFILE_LOADING: ' SET_PROFILE_LOADING',
+  SET_REPO_LOADING: ' SET_REPO_LOADING',
   SET_ERROR: ' SET_ERROR',
   SET_PROFILE: 'SET_PROFILE',
   SET_REPOS: 'SET_REPOS',
   SET_QUERY: 'SET_QUERY',
 };
 
-export const setLoading = (
+export const setProfileLoading = (
   dispatch: React.Dispatch<any>,
   status: boolean
-): void => dispatch({ type: ActionTypes.SET_LOADING, payload: status });
+): void => dispatch({ type: ActionTypes.SET_PROFILE_LOADING, payload: status });
+
+export const setRepoLoading = (
+  dispatch: React.Dispatch<any>,
+  status: boolean
+): void => dispatch({ type: ActionTypes.SET_REPO_LOADING, payload: status });
 
 export const setError = (
   dispatch: React.Dispatch<any>,
@@ -29,7 +35,7 @@ export const setError = (
   });
 
 export const getProfile = (dispatch: React.Dispatch<any>): void => {
-  setLoading(dispatch, true);
+  setProfileLoading(dispatch, true);
   axios
     .get(`https://api.github.com/orgs/Decathlon`, headers)
     .then((res) => res.data)
@@ -55,8 +61,8 @@ export const getRepos = (
   dispatch: React.Dispatch<any>,
   queryParams: QueryParams
 ): void => {
-  setLoading(dispatch, true);
-  // const esc = encodeURIComponent;
+  setRepoLoading(dispatch, true);
+  const esc = encodeURIComponent;
   // const query = Object.keys(queryParams)
   //   .map((k) => `${esc(k)}=${esc(queryParams[k])}`)
   //   .join('&');
@@ -67,14 +73,19 @@ export const getRepos = (
     sort,
     order,
     per_page: perPage,
+    license,
     language,
     topic,
+    stars,
+    forks,
   } = queryParams;
-  let q = keywords ? `${keywords}` : ``;
-  q += `+user:${user}`;
-  q += language ? `+language:${language}` : ``;
-  q += topic ? `+topic:${topic}` : ``;
-
+  let q = keywords ? `${esc(keywords)}` : ``;
+  q += `+user:${esc(user!)}`;
+  q += language ? `+language:${esc(language)}` : ``;
+  q += topic ? `+topic:${esc(topic)}` : ``;
+  q += license ? `+license:${esc(license.key)}` : ``;
+  q += stars && stars !== 'all' ? `+stars:${esc(stars)}` : ``;
+  q += forks && forks !== 'all' ? `+forks:${esc(forks)}` : ``;
   axios
     .get(
       `https://api.github.com/search/repositories?q=${q}&per_page=${perPage}&page=${page}&sort=${sort}&order=${order}`,

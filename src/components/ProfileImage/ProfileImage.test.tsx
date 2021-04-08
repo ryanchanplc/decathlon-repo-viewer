@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 import ProfileImage, { ProfileImageProps } from './ProfileImage';
 
-const avatarUrl = 'http://placekitten.com/150/150';
+// const avatarUrl = 'http://placekitten.com/150/150';
 
-const renderUI = (props: ProfileImageProps) =>
-  render(<ProfileImage {...props} />);
+// const renderUI = (props: ProfileImageProps) =>
+//   render(<ProfileImage {...props} />);
 
 it('should render image', () => {
   //const profileImage = renderUI({ avatar_url: avatarUrl });
