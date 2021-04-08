@@ -1,15 +1,4 @@
-export interface LicenseType {
-  /**
-   * license name
-   */
-  name: string;
-
-  key: string;
-  /**
-   * url of the license
-   */
-  url: string | null;
-}
+import LicenseType from './LicenseType';
 
 export default interface RepoType {
   id?: number;

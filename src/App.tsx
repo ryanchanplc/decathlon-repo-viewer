@@ -1,7 +1,6 @@
 import { ThemeProvider } from '@material-ui/core';
 import { Suspense, lazy } from 'react';
-import theme from './utils/theme';
-// import HomePage from './pages/HomePage/HomePage';
+import theme from './utils/themeUtil';
 import AppContextProvider from './context/AppContextProvider';
 import makeServer from './mock/server';
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';

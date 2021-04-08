@@ -1,34 +1,37 @@
 import { Meta, Story } from '@storybook/react';
+import { useForm } from 'react-hook-form';
 import ControlledSelect, { ControlledSelectProps } from './ControlledSelect';
 
 export default {
-  title: 'Common/ControlledSelect',
+  title: 'Form/ControlledSelect',
   component: ControlledSelect,
 } as Meta;
 
-const Template: Story<ControlledSelectProps> = (args) => (
-  <ControlledSelect {...args} />
-);
+const options = [
+  { id: 'javascript', label: 'Javascript' },
+  { id: 'typescript', label: 'Typescript' },
+];
 
-export const DropDownMenuNormal = Template.bind({});
-// DropDownMenuNormal.args = {
-//   id: 'language',
-//   label: 'Languages',
-//   options,
-// };
-// export const DropDownMenuSingleSelected = Template.bind({});
-// DropDownMenuSingleSelected.args = {
-//   id: 'language',
-//   label: 'Languages',
-//   options,
-//   value: 'javascript',
-// };
+const Template: Story<Omit<ControlledSelectProps, 'control'>> = (args) => {
+  const { control } = useForm();
+  return <ControlledSelect {...args} control={control} />;
+};
 
-// export const DropDownMenuMultipleSelected = Template.bind({});
-// DropDownMenuMultipleSelected.args = {
-//   id: 'language',
-//   label: 'Languages',
-//   multiple: true,
-//   options,
-//   value: ['javascript', 'typescript'],
-// };
+export const SingleWithArgsData = Template.bind({});
+SingleWithArgsData.args = {
+  id: 'language',
+  name: 'language',
+  label: 'Languages',
+  options,
+  defaultValue: 'javascript',
+};
+
+export const MultipleWithArgsData = Template.bind({});
+MultipleWithArgsData.args = {
+  id: 'language',
+  name: 'language',
+  label: 'Languages',
+  multiple: true,
+  options,
+  defaultValue: ['javascript', 'typescript'],
+};

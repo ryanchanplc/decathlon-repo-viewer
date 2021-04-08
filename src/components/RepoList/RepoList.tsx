@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { Grid, Box } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import RepoCard from '../RepoCard/RepoCard';
 import { AppContext } from '../../context/AppContext';

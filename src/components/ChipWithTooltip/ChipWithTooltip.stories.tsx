@@ -16,8 +16,8 @@ const Template: Story<ChipWithTooltipProps> = (args) => (
   <ChipWithTooltip {...args} />
 );
 
-export const ChipWithTooltipCompoent = Template.bind({});
-ChipWithTooltipCompoent.args = {
+export const WithArgsData = Template.bind({});
+WithArgsData.args = {
   label: 'Information',
   tooltip: 'Information',
   deleteIcon: <></>,

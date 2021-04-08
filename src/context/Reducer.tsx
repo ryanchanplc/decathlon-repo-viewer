@@ -1,7 +1,8 @@
 import { ActionTypes } from './Actions';
-import { AppState, Action } from './AppContext';
+import AppState from '../types/AppState';
+import ActionType from '../types/ActionType';
 
-export default (state: AppState, action: Action): any => {
+export default (state: AppState, action: ActionType): any => {
   switch (action.type) {
     case ActionTypes.SET_PROFILE:
       return { ...state, profile: action.payload, isProfileLoading: false };

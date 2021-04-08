@@ -8,19 +8,19 @@ export default {
 } as Meta;
 
 const Template: Story<IconTextProps> = (args) => <IconText {...args} />;
-export const IconTextIconOnly = Template.bind({});
-IconTextIconOnly.args = {
+export const WithoutArgsData = Template.bind({});
+WithoutArgsData.args = {
   icon: <ErrorOutlineIcon />,
 };
 
-export const IconTextWithText = Template.bind({});
-IconTextWithText.args = {
+export const WithArgsText = Template.bind({});
+WithArgsText.args = {
   text: 'Error',
   icon: <ErrorOutlineIcon />,
 };
 
-export const IconTextWithLink = Template.bind({});
-IconTextWithLink.args = {
+export const WithArgsTextLink = Template.bind({});
+WithArgsTextLink.args = {
   text: 'Error',
   icon: <ErrorOutlineIcon />,
   url: 'http://www.google.com.hk',

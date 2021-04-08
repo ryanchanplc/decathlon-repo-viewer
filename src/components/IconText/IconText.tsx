@@ -30,18 +30,22 @@ const IconText = (props: IconTextProps): JSX.Element => {
   const classes = useStyles();
 
   return (
-    <Grid container direction="row" wrap="nowrap">
-      <Grid item>{icon}</Grid>
-      <Grid item>
-        <Typography variant="subtitle1" className={classes.wrapIcon}>
-          {url && text && (
-            <Link href={url} color="inherit" target="_blank">
-              {text}
-            </Link>
-          )}
-        </Typography>
-      </Grid>
-    </Grid>
+    <>
+      {text && (
+        <Grid container direction="row" wrap="nowrap">
+          <Grid item>{icon}</Grid>
+          <Grid item>
+            <Typography variant="subtitle1" className={classes.wrapIcon}>
+              {url && (
+                <Link href={url} color="inherit" target="_blank">
+                  {text}
+                </Link>
+              )}
+            </Typography>
+          </Grid>
+        </Grid>
+      )}
+    </>
   );
 };
 

@@ -20,13 +20,19 @@ export default function PaginationControl(): JSX.Element {
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     SetQueryParams(dispatch, { ...state.queryParams, page: value });
   };
+
+  const totalPage = Math.ceil(
+    state.repos?.total_count / state.queryParams.per_page
+  );
   return (
     <div className={classes.root}>
-      <Pagination
-        count={Math.ceil(state.repos?.total_count / state.queryParams.per_page)}
-        page={state.page}
-        onChange={handleChange}
-      />
+      {totalPage !== 0 && (
+        <Pagination
+          count={totalPage}
+          page={state.page}
+          onChange={handleChange}
+        />
+      )}
     </div>
   );
 }

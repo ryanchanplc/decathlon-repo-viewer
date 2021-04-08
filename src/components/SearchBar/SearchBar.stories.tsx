@@ -1,10 +1,11 @@
 import { Meta, Story } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import SearchBar, { SearchBarProps } from './SearchBar';
+import { formDecorator } from '../../utils/decoratorUtil';
 
 export default {
-  title: 'Header/Search Bar',
+  title: 'Form/Search Bar',
   component: SearchBar,
+  decorators: formDecorator,
   argTypes: {
     placeholder: {
       defaultValue: 'Search',
@@ -18,7 +19,7 @@ export default {
 
 const Template: Story<SearchBarProps> = (args) => <SearchBar {...args} />;
 
-export const searchPlaceHolder = Template.bind({});
-searchPlaceHolder.args = {
+export const WithArgsData = Template.bind({});
+WithArgsData.args = {
   placeholder: 'Search',
 };

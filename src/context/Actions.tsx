@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import { QueryParams } from './AppContext';
+import { QueryParams } from '../types/AppState';
 
 const headers = {
   headers: {
@@ -57,35 +57,26 @@ export const SetQueryParams = (
   dispatch({ type: ActionTypes.SET_QUERY, payload: queryParams });
 };
 
+const getQueryParams = (query: QueryParams) => {
+  const { user, keywords, license, language, topic, stars, forks } = query;
+  const esc = encodeURIComponent;
+  let result = keywords ? `${esc(keywords)}` : ``;
+  result += user && `+user:${esc(user)}`;
+  result += language ? `+language:${esc(language)}` : ``;
+  result += topic ? `+topic:${esc(topic)}` : ``;
+  result += license ? `+license:${esc(license.key)}` : ``;
+  result += stars && stars !== 'all' ? `+stars:${esc(stars)}` : ``;
+  result += forks && forks !== 'all' ? `+forks:${esc(forks)}` : ``;
+  return result;
+};
 export const getRepos = (
   dispatch: React.Dispatch<any>,
   queryParams: QueryParams
 ): void => {
   setRepoLoading(dispatch, true);
-  const esc = encodeURIComponent;
-  // const query = Object.keys(queryParams)
-  //   .map((k) => `${esc(k)}=${esc(queryParams[k])}`)
-  //   .join('&');
-  const {
-    user,
-    keywords,
-    page,
-    sort,
-    order,
-    per_page: perPage,
-    license,
-    language,
-    topic,
-    stars,
-    forks,
-  } = queryParams;
-  let q = keywords ? `${esc(keywords)}` : ``;
-  q += `+user:${esc(user!)}`;
-  q += language ? `+language:${esc(language)}` : ``;
-  q += topic ? `+topic:${esc(topic)}` : ``;
-  q += license ? `+license:${esc(license.key)}` : ``;
-  q += stars && stars !== 'all' ? `+stars:${esc(stars)}` : ``;
-  q += forks && forks !== 'all' ? `+forks:${esc(forks)}` : ``;
+
+  const { page, sort, order, per_page: perPage } = queryParams;
+  const q = getQueryParams(queryParams);
   axios
     .get(
       `https://api.github.com/search/repositories?q=${q}&per_page=${perPage}&page=${page}&sort=${sort}&order=${order}`,

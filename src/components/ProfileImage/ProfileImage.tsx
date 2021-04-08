@@ -1,6 +1,5 @@
 import { makeStyles, Box } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
-import LazyLoad from 'react-lazyload';
 import ProfileType from '../../types/ProfileType';
 
 const useStyles = makeStyles(() => ({
@@ -16,15 +15,13 @@ const ProfileImage = (props: ProfileImageProps): JSX.Element => {
   const classes = useStyles();
 
   return avatarUrl ? (
-    <LazyLoad height={150} width={150}>
-      <img
-        src={avatarUrl}
-        alt="avatar"
-        height="150"
-        width="150"
-        className={classes.image}
-      />
-    </LazyLoad>
+    <img
+      src={avatarUrl}
+      alt="avatar"
+      height="150"
+      width="150"
+      className={classes.image}
+    />
   ) : (
     <Box width={150}>
       <Skeleton

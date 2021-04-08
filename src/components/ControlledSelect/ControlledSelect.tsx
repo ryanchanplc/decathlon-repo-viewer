@@ -66,7 +66,7 @@ export interface ControlledSelectProps {
   /**
    *  default value
    */
-  defaultValue: string;
+  defaultValue: string | string[];
 
   /**
    *  handle Change

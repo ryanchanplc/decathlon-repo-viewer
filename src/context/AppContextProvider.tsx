@@ -1,9 +1,16 @@
 import { useReducer } from 'react';
 import { AppContext, initialState } from './AppContext';
+import AppState from '../types/AppState';
 import reducer from './Reducer';
 
-const AppContextProvider: React.FC = ({ children }): JSX.Element => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+interface AppContextProviderProps {
+  initial?: AppState;
+}
+const AppContextProvider: React.FC<AppContextProviderProps> = ({
+  children,
+  initial = initialState,
+}): JSX.Element => {
+  const [state, dispatch] = useReducer(reducer, initial);
 
   return (
     <AppContext.Provider

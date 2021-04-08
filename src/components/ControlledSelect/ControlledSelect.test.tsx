@@ -1,38 +1,60 @@
-import { render } from '@testing-library/react';
-import { useForm, Controller } from 'react-hook-form';
+import { render, fireEvent } from '@testing-library/react';
+import { useForm } from 'react-hook-form';
 import ControlledSelect, { ControlledSelectProps } from './ControlledSelect';
 
 const id = 'testingId';
-
-const Form = (props: ControlledSelectProps) => {
+const label = 'testing';
+const options = [
+  { id: 'javascript', label: 'Javascript' },
+  { id: 'typescript', label: 'Typescript' },
+];
+const Form = (
+  props: Pick<
+    ControlledSelectProps,
+    'id' | 'label' | 'options' | 'defaultValue' | 'multiple'
+  >
+): JSX.Element => {
   const { control } = useForm();
 
   return (
-    <Controller
+    <ControlledSelect
+      {...props}
       name={id}
-      render={({ field }) => <ControlledSelect {...props} {...field} />}
       control={control}
+      handleChange={() => {}}
     />
   );
 };
-const renderUI = (props: ControlledSelectProps) => render(<Form {...props} />);
+const renderUI = (
+  props: Pick<
+    ControlledSelectProps,
+    'id' | 'label' | 'options' | 'defaultValue' | 'multiple'
+  >
+) => render(<Form {...props} />);
 
-// it('should render dropdown with options selectable', () => {
-//   const form = renderUI({ id, label, options });
-//   const dropDownMenu = form.getByLabelText(label);
-//   expect(dropDownMenu).toBeInTheDocument();
-//   fireEvent.change(dropDownMenu, {
-//     target: { value: options[0].id },
-//   });
-//   expect(form.getByText(options[0].label)).toBeInTheDocument();
-//   fireEvent.change(dropDownMenu, {
-//     target: { value: options[1].id },
-//   });
-//   expect(form.getByText(options[1].label)).toBeInTheDocument();
-// });
+it('should render dropdown with options selectable', () => {
+  const form = renderUI({
+    id,
+    label,
+    options,
+    multiple: false,
+    defaultValue: '',
+  });
 
-// it('should render multiple dropdown with options selectable', async () => {
-//   renderUI({ id, label, options, multiple: true });
+  const dropDownMenu = form.getByLabelText(label);
+  expect(dropDownMenu).toBeInTheDocument();
+  fireEvent.change(dropDownMenu, {
+    target: { value: options[0].id },
+  });
+  expect(form.getByText(options[0].label)).toBeInTheDocument();
+  fireEvent.change(dropDownMenu, {
+    target: { value: options[1].id },
+  });
+  expect(form.getByText(options[1].label)).toBeInTheDocument();
+});
+
+// it('should render single dropdown with options selectable', async () => {
+//   RenderUI({ id, label, options, multiple: true, defaultValue: [] });
 //   const dropDownMenu = screen.getByRole('button');
 //   expect(dropDownMenu).toBeInTheDocument();
 //   fireEvent.mouseDown(dropDownMenu);

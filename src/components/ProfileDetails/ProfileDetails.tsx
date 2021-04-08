@@ -12,6 +12,9 @@ export type ProfileDetailsProps = {
 } & Omit<ProfileType, 'avatar_url'>;
 
 interface ItemWrapperProps {
+  /**
+   * loading flag
+   */
   isLoading: boolean;
 }
 const ItemWrapper: React.FC<ItemWrapperProps> = (props): JSX.Element => {

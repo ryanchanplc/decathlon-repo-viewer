@@ -5,7 +5,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import { AppContext } from '../../context/AppContext';
 import { SetQueryParams } from '../../context/Actions';
 
-import Sorting from '../Sorting/Sorting';
+import SelectFields from '../SelectFields/SelectFields';
 
 const Form = (): JSX.Element => {
   const methods = useForm();
@@ -32,8 +32,8 @@ const Form = (): JSX.Element => {
             <SearchBar placeholder="Search Name" />
           </Grid>
           <Grid item xs={12}>
-            <Sorting
-              onSort={() => {
+            <SelectFields
+              onSelected={() => {
                 handleSubmit(getValues());
               }}
             />

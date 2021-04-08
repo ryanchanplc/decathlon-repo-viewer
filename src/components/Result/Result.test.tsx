@@ -1,21 +1,25 @@
 import { render } from '@testing-library/react';
-import Result, { ResultProps } from './Result';
+import Result from './Result';
+import { DefaultWrapper } from '../../utils/testUtil';
+import { initialState } from '../../context/AppContext';
+import { QueryParams } from '../../types/AppState';
 
-const renderUI = (props: ResultProps) => render(<Result {...props} />);
-
-const count = 0;
 const language = 'javascript';
-const keywords = 'test';
-const type = 'source';
-const topic = 'test';
-it('should render details', () => {
-  const result = renderUI({
-    count,
-    language,
-    type,
-    topic,
-    keywords,
-  });
+// const keywords = 'test';
+// const type = 'source';
+// const topic = 'test';
 
-  expect(result.getByText(count)).toBeInTheDocument();
+const WrappedComponent = (props: QueryParams) => (
+  <DefaultWrapper initialState={{ ...initialState, queryParams: { ...props } }}>
+    <Result />
+  </DefaultWrapper>
+);
+
+const renderUI = (props: QueryParams) =>
+  render(<WrappedComponent {...props} />);
+
+it('should render details', () => {
+  const result = renderUI({ language });
+
+  expect(result.getByText(language)).toBeInTheDocument();
 });

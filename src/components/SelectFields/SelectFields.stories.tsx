@@ -1,11 +1,11 @@
 import { Meta, Story } from '@storybook/react';
-import Form from './Form';
+import SelectFields from './SelectFields';
 import { formDecorator } from '../../utils/decoratorUtil';
 
 export default {
-  title: 'Form/Form',
-  component: Form,
+  title: 'Form/Select Fields',
+  component: SelectFields,
   decorators: formDecorator,
 } as Meta;
-const Template: Story = () => <Form />;
+const Template: Story = () => <SelectFields onSelected={() => {}} />;
 export const WithState = Template.bind({});

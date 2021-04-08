@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import {
   Card,
   CardContent,
@@ -11,8 +10,6 @@ import {
 import RepoTopics from '../RepoTopics/RepoTopics';
 import RepoDetails from '../RepoDetails/RepoDetails';
 import RepoType from '../../types/RepoType';
-import { AppContext } from '../../context/AppContext';
-import { SetQueryParams } from '../../context/Actions';
 
 const useStyles = makeStyles(() =>
   createStyles({

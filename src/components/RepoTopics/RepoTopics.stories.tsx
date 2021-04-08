@@ -7,7 +7,7 @@ export default {
 } as Meta;
 
 const Template: Story<RepoTopicsProps> = (args) => <RepoTopics {...args} />;
-export const RepoTopicsWithData = Template.bind({});
-RepoTopicsWithData.args = {
+export const WithArgsData = Template.bind({});
+WithArgsData.args = {
   topics: ['HTML', 'CSS'],
 };

@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { Typography } from '@material-ui/core';
 import ChipWithTooltip from '../ChipWithTooltip/ChipWithTooltip';
-import { AppContext, starsTypes, forksTypes } from '../../context/AppContext';
+import { AppContext } from '../../context/AppContext';
+import { STARS, FORKS } from '../../constant/constants';
 import { SetQueryParams } from '../../context/Actions';
 
 const Result = (): JSX.Element => {
@@ -97,7 +98,7 @@ const Result = (): JSX.Element => {
       )}
       {stars && (
         <Typography variant="body2" component="span">
-          <b>{starsTypes[stars]}</b> stars
+          <b>{STARS[stars]}</b> stars
         </Typography>
       )}
       {stars && forks && (
@@ -107,7 +108,7 @@ const Result = (): JSX.Element => {
       )}
       {forks && (
         <Typography variant="body2" component="span">
-          <b>{forksTypes[forks]}</b> forks
+          <b>{FORKS[forks]}</b> forks
         </Typography>
       )}
       {perPage && (

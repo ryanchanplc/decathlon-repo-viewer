@@ -7,8 +7,8 @@ export default {
 } as Meta;
 
 const Template: Story<RepoDetailsProps> = (args) => <RepoDetails {...args} />;
-export const RepoDetailsWithData = Template.bind({});
-RepoDetailsWithData.args = {
+export const WithArgsData = Template.bind({});
+WithArgsData.args = {
   language: 'Javascript',
   license: { name: 'Other', url: null, key: '' },
   forks_count: 1,

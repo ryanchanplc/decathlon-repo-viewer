@@ -4,9 +4,10 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import CallSplitIcon from '@material-ui/icons/CallSplit';
 import { useContext } from 'react';
 import ChipWithTooltip from '../ChipWithTooltip/ChipWithTooltip';
-import RepoType from '../../types/RepoType';
 import { AppContext } from '../../context/AppContext';
 import { SetQueryParams } from '../../context/Actions';
+
+import RepoType from '../../types/RepoType';
 
 export type RepoDetailsProps = Pick<
   RepoType,
@@ -42,6 +43,9 @@ const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
     if (days < 30) return `Updated ${Math.floor(days)} days ago`;
     return `Updated on ${update.toISOString().split('T')[0]}`;
   };
+
+  const checkNonZeroFalsy = (value: number): any => value || value === 0;
+
   return (
     <Grid
       item
@@ -81,7 +85,7 @@ const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
           />
         </Grid>
       )}
-      {forkCount !== null && (
+      {checkNonZeroFalsy(forkCount) && (
         <Grid item>
           <Tooltip title="Forks">
             <Chip
@@ -93,7 +97,7 @@ const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
           </Tooltip>
         </Grid>
       )}
-      {issueCount !== null && (
+      {checkNonZeroFalsy(issueCount) && (
         <Grid item>
           <Tooltip title="Issue">
             <Chip
@@ -105,7 +109,7 @@ const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
           </Tooltip>
         </Grid>
       )}
-      {starCount !== null && (
+      {checkNonZeroFalsy(starCount) && (
         <Grid item>
           <Tooltip title="Star">
             <Chip
@@ -117,7 +121,6 @@ const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
           </Tooltip>
         </Grid>
       )}
-
       {updatedAt && (
         <Grid item>
           <ChipWithTooltip
