@@ -15,9 +15,11 @@ const ProfileCard = (): JSX.Element => {
   const { avatar_url: avatarUrl, ...details } = state.profile || {};
 
   return (
-    <Box display="flex" flexDirection="row" alignItems="center">
-      <ProfileImage avatar_url={avatarUrl} />
-      <Box p={2} width={1}>
+    <Box display="flex" flexDirection="row" alignItems="center" flexWrap="wrap">
+      <Box mr={2} mb={2}>
+        <ProfileImage avatar_url={avatarUrl} />
+      </Box>
+      <Box>
         <ProfileDetails isLoading={state.isProfileLoading} {...details} />
       </Box>
     </Box>
