@@ -5,7 +5,10 @@ import AppContextProvider from './context/AppContextProvider';
 import makeServer from './mock/server';
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
 
-if (process.env.NODE_ENV === 'development') {
+if (
+  process.env.NODE_ENV === 'development' &&
+  process.env.REACT_APP_USE_MOCK === 'true'
+) {
   makeServer({ environment: 'development' });
 }
 

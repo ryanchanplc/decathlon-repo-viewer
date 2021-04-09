@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import ChipWithTooltip from '../ChipWithTooltip/ChipWithTooltip';
 import { AppContext } from '../../context/AppContext';
 import { SetQueryParams } from '../../context/Actions';
-
+import getTimeDifference from '../../utils/timeUtil';
 import RepoType from '../../types/RepoType';
 
 export type RepoDetailsProps = Pick<
@@ -33,18 +33,7 @@ const RepoDetails = (props: RepoDetailsProps): JSX.Element => {
   const handleClick = (value: any) =>
     SetQueryParams(dispatch, { ...state.queryParams, ...value });
 
-  const getTimeDifference = (updateAt: string) => {
-    const update = new Date(updateAt);
-    const now = new Date();
-    const milliseconds = Math.abs(now.getTime() - update.getTime());
-    const days = milliseconds / (1000 * 3600 * 24);
-    const hour = milliseconds / 1000 / 3600;
-    if (hour < 24) return `Updated ${Math.floor(hour)} hours ago`;
-    if (days < 30) return `Updated ${Math.floor(days)} days ago`;
-    return `Updated on ${update.toISOString().split('T')[0]}`;
-  };
-
-  const checkNonZeroFalsy = (value: number): any => value || value === 0;
+  const checkNonZeroFalsy = (value?: number): any => value || value === 0;
 
   return (
     <Grid

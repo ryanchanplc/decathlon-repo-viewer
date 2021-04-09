@@ -1,4 +1,5 @@
 export default interface ErrorType {
-  status: any;
-  message: string;
+  status: any | null;
+  message: string | null;
+  body: string | null;
 }

@@ -1,4 +1,4 @@
-import { ActionTypes } from './Actions';
+import { ActionTypes } from '../constant/constants';
 import AppState from '../types/AppState';
 import ActionType from '../types/ActionType';
 

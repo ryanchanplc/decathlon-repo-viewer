@@ -5,7 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
-    "@material-ui/lab": "*",
+    "@material-ui/lab": "^4.0.0-alpha.57",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.1",
@@ -27,18 +27,12 @@
     "node-sass": "^5.0.0",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
-    "react-async-hook": "^3.6.2",
     "react-dom": "^17.0.1",
     "react-hook-form": "^7.0.0",
     "react-lazyload": "^3.2.0",
-    "react-redux": "^7.2.3",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
-    "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.3.0",
-    "swr": "^0.5.5",
     "typescript": "4.2.2",
     "web-vitals": "^1.1.0"
   },
@@ -58,11 +52,11 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
-      "npm run lint",
-      "npm run test:staged"
+      "yarn lint",
+      "yarn test:staged"
     ],
     "*.{ts,tsx,js,jsx,json}": [
-      "npm run prettify"
+      "yarn prettify"
     ]
   },
   "eslintConfig": {
@@ -91,18 +85,21 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.2.2",
-    "@storybook/addon-essentials": "^6.2.2",
-    "@storybook/addon-links": "^6.2.2",
-    "@storybook/node-logger": "^6.2.2",
+    "@babel/core": "^7.13.15",
+    "@storybook/addon-actions": "^6.2.5",
+    "@storybook/addon-essentials": "^6.2.5",
+    "@storybook/addon-links": "^6.2.5",
+    "@storybook/node-logger": "^6.2.5",
     "@storybook/preset-create-react-app": "^3.1.7",
-    "@storybook/react": "^6.2.2",
+    "@storybook/react": "^6.2.5",
     "@types/react-router": "^5.1.13",
     "@types/react-router-dom": "^5.1.7",
-    "babel-loader": "^8.1.0",
     "faker": "^5.5.2",
     "husky": "^6.0.0",
     "lint-staged": "^10.5.4",
     "miragejs": "^0.1.41"
+  },
+  "resolutions": {
+    "babel-loader": "8.1.0"
   }
 }

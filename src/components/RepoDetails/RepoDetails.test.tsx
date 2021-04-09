@@ -1,32 +1,41 @@
 import { render } from '@testing-library/react';
 import RepoDetails, { RepoDetailsProps } from './RepoDetails';
+import getTimeDifference from '../../utils/timeUtil';
 
 const renderUI = (props: RepoDetailsProps) =>
   render(<RepoDetails {...props} />);
 
-const language = 'javascript';
-const license = {
-  key: 'test-license',
-  name: 'test license',
-  url: 'https://github.com/',
+const testProfileDetails = {
+  language: 'javascript',
+  license: {
+    key: 'test-license',
+    name: 'test license',
+    url: 'https://github.com/',
+  },
+  forks_count: 1,
+  open_issues_count: 2,
+  stargazers_count: 3,
+  updated_at: '2020-12-21T10:54:17Z',
 };
-const forksCount = 1;
-const issuesCount = 2;
-const starCount = 3;
-const updatedAt = '123';
-it('should render details', () => {
-  const repoDetails = renderUI({
-    language,
-    license,
-    forks_count: forksCount,
-    open_issues_count: issuesCount,
-    stargazers_count: starCount,
-    updated_at: updatedAt,
-  });
 
-  expect(repoDetails.getByText(language)).toBeInTheDocument();
-  expect(repoDetails.getByText(license.name)).toBeInTheDocument();
-  expect(repoDetails.getByText(forksCount)).toBeInTheDocument();
-  expect(repoDetails.getByText(issuesCount)).toBeInTheDocument();
-  expect(repoDetails.getByText(starCount)).toBeInTheDocument();
+it('should render details', () => {
+  const repoDetails = renderUI(testProfileDetails);
+
+  expect(
+    repoDetails.getByText(testProfileDetails.language)
+  ).toBeInTheDocument();
+  expect(
+    repoDetails.getByText(testProfileDetails.license.name)
+  ).toBeInTheDocument();
+  expect(
+    repoDetails.getByText(testProfileDetails.forks_count)
+  ).toBeInTheDocument();
+  expect(
+    repoDetails.getByText(testProfileDetails.open_issues_count)
+  ).toBeInTheDocument();
+  expect(
+    repoDetails.getByText(getTimeDifference(testProfileDetails.updated_at))
+  ).toBeInTheDocument();
 });
+
+export default testProfileDetails;

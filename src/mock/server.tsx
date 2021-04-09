@@ -9,7 +9,7 @@ import {
   REPO_ENDPOINT,
   PROFILE_ENDPOINT,
   USER,
-} from '../constant/url';
+} from '../constant/api';
 
 const RepoModel: ModelDefinition<RepoType> = Model.extend({});
 type AppRegistry = Registry<{ repo: typeof RepoModel }, Record<string, never>>;

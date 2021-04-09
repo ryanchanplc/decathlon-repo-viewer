@@ -6,6 +6,7 @@ import Form from '../../components/Form/Form';
 import ProfileCard from '../../components/ProfileCard/ProfileCard';
 import PaginationControl from '../../components/PaginationControl/PaginationControl';
 import Result from '../../components/Result/Result';
+import CustomizedSnackbars from '../../components/CustomizedSnackbars/CustomizedSnackbars';
 
 const HomePage: React.FC = () => (
   <>
@@ -32,6 +33,7 @@ const HomePage: React.FC = () => (
         </Grid>
       </Container>
     </Box>
+    <CustomizedSnackbars />
   </>
 );
 export default HomePage;

@@ -1,3 +1,11 @@
+export const ActionTypes = {
+  SET_PROFILE_LOADING: ' SET_PROFILE_LOADING',
+  SET_REPO_LOADING: ' SET_REPO_LOADING',
+  SET_ERROR: ' SET_ERROR',
+  SET_PROFILE: 'SET_PROFILE',
+  SET_REPOS: 'SET_REPOS',
+  SET_QUERY: 'SET_QUERY',
+};
 export const FORKS: Record<string, string> = {
   all: 'All',
   '<50': '< 50',

@@ -5,7 +5,7 @@ import {
   Typography,
 } from '@material-ui/core';
 
-interface LoadingSpinnerProps {
+export interface LoadingSpinnerProps {
   /**
    *  the loading div occupy will full height of the viewport
    */

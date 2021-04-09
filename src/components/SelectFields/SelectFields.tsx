@@ -71,7 +71,7 @@ const SelectFields = (props: SelectFieldsProp): JSX.Element => {
       {fieldsConfig.map((field) => {
         const { id, label, options, sm } = field;
         return (
-          <Grid item xs={12} sm={sm as GridSize}>
+          <Grid item xs={12} sm={sm as GridSize} key={id}>
             <ControlledSelect
               name={id}
               id={id}

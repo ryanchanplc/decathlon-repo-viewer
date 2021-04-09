@@ -10,7 +10,7 @@ import {
   REPO_ENDPOINT,
   PROFILE_ENDPOINT,
   USER,
-} from '../constant/url';
+} from '../constant/api';
 
 export const mockRepos = (size: number) => (): Server =>
   createServer({
