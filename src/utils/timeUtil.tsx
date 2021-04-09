@@ -8,4 +8,5 @@ const getTimeDifference = (updateAt: string): string => {
   if (days < 30) return `Updated ${Math.floor(days)} days ago`;
   return `Updated on ${update.toISOString().split('T')[0]}`;
 };
+
 export default getTimeDifference;

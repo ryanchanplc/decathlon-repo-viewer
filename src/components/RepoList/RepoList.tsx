@@ -9,6 +9,7 @@ import RepoType from '../../types/RepoType';
 const RepoList = (): JSX.Element => {
   const { state, dispatch } = useContext(AppContext);
   const { isRepoLoading, queryParams, repos } = state;
+
   useEffect(() => {
     getRepos(dispatch, queryParams);
   }, [dispatch, queryParams]);
@@ -36,4 +37,5 @@ const RepoList = (): JSX.Element => {
     </>
   );
 };
+
 export default RepoList;

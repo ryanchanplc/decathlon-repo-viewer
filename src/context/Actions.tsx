@@ -106,6 +106,7 @@ const getQueryParams = (query: QueryParams) => {
   result += mirror && mirror ? `+mirror:${esc(mirror)}` : ``;
   return result;
 };
+
 export const getRepos = (
   dispatch: React.Dispatch<any>,
   queryParams: QueryParams

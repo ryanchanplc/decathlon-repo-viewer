@@ -119,4 +119,5 @@ const Result = (): JSX.Element => {
     </>
   );
 };
+
 export default Result;

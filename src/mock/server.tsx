@@ -14,6 +14,7 @@ import {
 const RepoModel: ModelDefinition<RepoType> = Model.extend({});
 type AppRegistry = Registry<{ repo: typeof RepoModel }, Record<string, never>>;
 type AppSchema = Schema<AppRegistry>;
+
 export const mockRepos = (size: number) => (): any =>
   createServer({
     routes() {

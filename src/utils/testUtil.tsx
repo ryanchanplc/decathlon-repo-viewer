@@ -5,6 +5,7 @@ import AppContextProvider from '../context/AppContextProvider';
 interface DefaultWrapperProps {
   initialState?: AppState;
 }
+
 export const DefaultWrapper: React.FC<DefaultWrapperProps> = (
   props
 ): JSX.Element => {

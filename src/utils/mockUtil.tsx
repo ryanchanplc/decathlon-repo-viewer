@@ -5,6 +5,7 @@ export const checkArray = (array: any, value: any): boolean =>
 
 export const checkValue = (item: any, value: any): boolean =>
   value && value !== '' ? item === value : true;
+
 export const checkRange = (item: number, value: string): boolean => {
   if (!value || value === '') return true;
   const isRange = value.includes('..');

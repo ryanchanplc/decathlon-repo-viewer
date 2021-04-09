@@ -42,7 +42,9 @@ const LoadingSpinner = (props: LoadingSpinnerProps): JSX.Element => {
     </Grid>
   );
 };
+
 LoadingSpinner.defaultProps = {
   fullHeight: false,
 };
+
 export default LoadingSpinner;

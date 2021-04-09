@@ -17,6 +17,7 @@ interface ItemWrapperProps {
    */
   isLoading: boolean;
 }
+
 const ItemWrapper: React.FC<ItemWrapperProps> = (props): JSX.Element => {
   const { isLoading, children } = props;
   return isLoading ? (

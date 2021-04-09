@@ -1,7 +1,6 @@
 /* eslint  @typescript-eslint/explicit-module-boundary-types: 0 */
 import { createServer, Server } from 'miragejs';
 import { useForm, FormProvider } from 'react-hook-form';
-
 import AppState from '../types/AppState';
 import AppContextProvider from '../context/AppContextProvider';
 import { generateRepos, generateProfile } from '../mock/generate';

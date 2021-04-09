@@ -58,6 +58,16 @@ npm run test
 
 ```
 
+# Build
+
+```
+yarn run build
+```
+
+```
+npm run build
+```
+
 # Storybook
 
 ```

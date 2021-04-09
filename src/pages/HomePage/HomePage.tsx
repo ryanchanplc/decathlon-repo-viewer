@@ -36,4 +36,5 @@ const HomePage: React.FC = () => (
     <CustomizedSnackbars />
   </>
 );
+
 export default HomePage;
