@@ -12,8 +12,4 @@ export default interface RepoType {
   open_issues_count?: number;
   license?: LicenseType;
   topics?: Array<string>;
-  private?: boolean;
-  fork?: boolean;
-  archived?: boolean;
-  disabled?: boolean;
 }

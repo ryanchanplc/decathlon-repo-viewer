@@ -81,7 +81,18 @@ export const SetQueryParams = (
 };
 
 const getQueryParams = (query: QueryParams) => {
-  const { user, keywords, license, language, topic, stars, forks } = query;
+  const {
+    user,
+    keywords,
+    license,
+    language,
+    topic,
+    stars,
+    forks,
+    private: isPrivate,
+    archived,
+    mirror,
+  } = query;
   const esc = encodeURIComponent;
   let result = keywords ? `${esc(keywords)}` : ``;
   result += user && `+user:${esc(user)}`;
@@ -90,6 +101,9 @@ const getQueryParams = (query: QueryParams) => {
   result += license ? `+license:${esc(license.key)}` : ``;
   result += stars && stars !== 'all' ? `+stars:${esc(stars)}` : ``;
   result += forks && forks !== 'all' ? `+forks:${esc(forks)}` : ``;
+  result += isPrivate && isPrivate ? `+is:private` : ``;
+  result += archived && archived ? `+archived:${esc(archived)}` : ``;
+  result += mirror && mirror ? `+mirror:${esc(mirror)}` : ``;
   return result;
 };
 export const getRepos = (

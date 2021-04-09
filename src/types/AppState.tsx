@@ -21,7 +21,11 @@ export interface QueryParams {
   order?: OrderState;
   forks?: string;
   stars?: string;
+  private?: boolean;
+  archived?: boolean;
+  mirror?: boolean;
 }
+
 export type OrderState = typeof ORDER.asc | typeof ORDER.desc;
 export type SortState =
   | typeof SORT.stars

@@ -35,6 +35,9 @@ export const filter = (q: any, schema: any): Array<any> => {
     license: '',
     forks: '',
     stars: '',
+    is: '',
+    archived: '',
+    mirror: '',
   };
 
   q.split(' ').forEach((element: any) => {
@@ -54,7 +57,10 @@ export const filter = (q: any, schema: any): Array<any> => {
         checkArray(item.topics, query.topic) &&
         checkValue(item.license?.key, query.license) &&
         checkRange(item.stargazers_count, query.stars) &&
-        checkRange(item.forks_count, query.forks)
+        checkRange(item.forks_count, query.forks) &&
+        checkValue(item.private, query.is !== '' && true) &&
+        checkValue(item.archived, !!query.archived) &&
+        checkValue(item.mirror, !!query.mirror)
     );
 };
 

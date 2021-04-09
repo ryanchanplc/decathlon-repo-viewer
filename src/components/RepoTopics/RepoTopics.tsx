@@ -17,8 +17,9 @@ const RepoTopics = (props: RepoTopicsProps): JSX.Element => {
     <>
       {topics && (
         <Grid item container spacing={1} direction="row" justify="flex-start">
-          {topics.map((topic) => (
-            <Grid item key={topic}>
+          {topics.map((topic, index) => (
+            // eslint-disable-next-line
+            <Grid item key={`topic${index}`}>
               <ChipWithTooltip
                 label={topic}
                 clickable

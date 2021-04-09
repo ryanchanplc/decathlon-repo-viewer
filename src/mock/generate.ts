@@ -27,7 +27,7 @@ export const generateRepos = (size: number): Array<any> =>
     private: faker.datatype.boolean(),
     fork: faker.datatype.boolean(),
     archived: faker.datatype.boolean(),
-    disabled: faker.datatype.boolean(),
+    mirror: faker.datatype.boolean(),
     updated_at: faker.datatype.datetime(),
   }));
 

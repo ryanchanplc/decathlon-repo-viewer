@@ -4,7 +4,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import SearchBar from '../SearchBar/SearchBar';
 import { AppContext } from '../../context/AppContext';
 import { SetQueryParams } from '../../context/Actions';
-
+import CheckBoxFields from '../CheckBoxFields/CheckBoxFields';
 import SelectFields from '../SelectFields/SelectFields';
 
 const Form = (): JSX.Element => {
@@ -34,6 +34,13 @@ const Form = (): JSX.Element => {
           <Grid item xs={12}>
             <SelectFields
               onSelected={() => {
+                handleSubmit(getValues());
+              }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <CheckBoxFields
+              onChecked={() => {
                 handleSubmit(getValues());
               }}
             />
