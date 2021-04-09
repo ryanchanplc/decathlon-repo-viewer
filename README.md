@@ -71,7 +71,3 @@ yarn storybook
 npm run storybook
 
 ```
-
-```
-
-```
