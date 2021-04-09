@@ -2,6 +2,11 @@
 
 A Github repo viewer that fetch Decalthon 's github repo.
 
+Below demo doestn use token so it only has 50 requests per hour.
+Please follow the steps below to add your person token to increase rate limit.
+
+Demo: [https://decalthon-repo-viewer.herokuapp.com/](https://decalthon-repo-viewer.herokuapp.com/)
+
 # API SETTING
 
 ## TOKEN

@@ -36,10 +36,12 @@ const IconText = (props: IconTextProps): JSX.Element => {
           <Grid item>{icon}</Grid>
           <Grid item>
             <Typography variant="subtitle1" className={classes.wrapIcon}>
-              {url && (
+              {url ? (
                 <Link href={url} color="inherit" target="_blank">
                   {text}
                 </Link>
+              ) : (
+                <>{text}</>
               )}
             </Typography>
           </Grid>

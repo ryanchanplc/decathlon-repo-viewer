@@ -23,9 +23,9 @@ it('should render details', () => {
   expect(
     profileDetails.getByText(profileDetailsData.description)
   ).toBeInTheDocument();
-  // expect(
-  //   profileDetails.getByText(profileDetailsData.location)
-  // ).toBeInTheDocument();
+  expect(
+    profileDetails.getByText(profileDetailsData.location)
+  ).toBeInTheDocument();
   expect(profileDetails.getByText(profileDetailsData.blog)).toBeInTheDocument();
   expect(profileDetails.getByText(profileDetailsData.blog)).toHaveAttribute(
     'href',

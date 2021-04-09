@@ -43,6 +43,9 @@ it('should render card with profile', async () => {
     expect(result.getByText(profileDetailsData.description)).toBeInTheDocument()
   );
   await waitFor(() =>
+    expect(result.getByText(profileDetailsData.location)).toBeInTheDocument()
+  );
+  await waitFor(() =>
     expect(result.getByText(profileDetailsData.email)).toBeInTheDocument()
   );
   await waitFor(() =>
