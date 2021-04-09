@@ -1,7 +1,7 @@
 import { Controller, Control } from 'react-hook-form';
 import { FormControlLabel, Checkbox } from '@material-ui/core';
 
-export interface ControlledSelectProps {
+export interface ControlledCheckBoxProps {
   /**
    *  id for the checkbox
    */
@@ -33,7 +33,7 @@ export interface ControlledSelectProps {
   handleChange: (e: any) => void;
 }
 
-const CheckBox = (props: ControlledSelectProps): JSX.Element => {
+const CheckBox = (props: ControlledCheckBoxProps): JSX.Element => {
   const { id, label, control, name, defaultValue, handleChange } = props;
 
   return (

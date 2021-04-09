@@ -11,10 +11,4 @@ it('should render image', async () => {
   expect(profileImage.getByRole('img')).toHaveAttribute('src', avatarUrl);
   expect(profileImage.getByRole('img')).toHaveAttribute('alt', 'avatar');
 });
-
-// it('should render placeholder', () => {
-//   const profileImage = renderUI({});
-//   const avatar = profileImage.getByRole('img');
-//   expect(avatar).toHaveAttribute('src', placeholderUrl);
-//   expect(avatar).toHaveAttribute('alt', 'avatar');
-// });
+export default avatarUrl;

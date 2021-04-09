@@ -52,19 +52,3 @@ it('should render dropdown with options selectable', () => {
   });
   expect(form.getByText(options[1].label)).toBeInTheDocument();
 });
-
-// it('should render single dropdown with options selectable', async () => {
-//   RenderUI({ id, label, options, multiple: true, defaultValue: [] });
-//   const dropDownMenu = screen.getByRole('button');
-//   expect(dropDownMenu).toBeInTheDocument();
-//   fireEvent.mouseDown(dropDownMenu);
-//   const listbox = within(screen.getByRole('listbox'));
-
-//   listbox.getByText(options[0].label);
-//   listbox.getByText(options[1].label);
-//   fireEvent.click(listbox.getByText(options[0].label));
-//   fireEvent.click(listbox.getByText(options[1].label));
-//   const multipleText = `${options[0].label} ,${options[1].label}`;
-
-//   expect(dropDownMenu).toHaveTextContent(multipleText);
-// });

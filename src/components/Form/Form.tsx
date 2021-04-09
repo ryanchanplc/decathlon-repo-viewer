@@ -29,7 +29,7 @@ const Form = (): JSX.Element => {
       >
         <Grid container direction="column" spacing={2}>
           <Grid item xs={12}>
-            <SearchBar placeholder="Search Name" />
+            <SearchBar placeholder="Search" />
           </Grid>
           <Grid item xs={12}>
             <SelectFields

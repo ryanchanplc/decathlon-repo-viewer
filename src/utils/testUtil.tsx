@@ -14,11 +14,11 @@ export const DefaultWrapper: React.FC<DefaultWrapperProps> = (
   );
 };
 
-export const FormWrapper: React.FC = (children: any) => {
+export const FormWrapper: React.FC<DefaultWrapperProps> = (props) => {
   const methods = useForm();
-
+  const { initialState, children } = props;
   return (
-    <AppContextProvider>
+    <AppContextProvider initial={initialState}>
       <FormProvider {...methods}>{children}</FormProvider>
     </AppContextProvider>
   );

@@ -4,37 +4,49 @@ import ProfileDetails, { ProfileDetailsProps } from './ProfileDetails';
 const renderUI = (props: ProfileDetailsProps) =>
   render(<ProfileDetails {...props} />);
 
-const name = 'name';
-const description = 'description';
-const location = 'location';
-const blog = 'http://google.com.hk';
-const twitterUsername = 'test'; //camelcase
-const email = 'test@test.com';
+const profileDetailsData = {
+  name: 'name',
+  description: 'description',
+  location: 'location',
+  blog: 'http://google.com.hk',
+  twitter_username: 'test', //camelcase
+  email: 'test@test.com',
+};
 
 it('should render details', () => {
   const profileDetails = renderUI({
-    name,
-    description,
-    location,
-    blog,
-    twitter_username: twitterUsername,
-    email,
+    ...profileDetailsData,
     isLoading: false,
   });
 
-  expect(profileDetails.getByText(name)).toBeInTheDocument();
-  expect(profileDetails.getByText(description)).toBeInTheDocument();
-  //expect(profileDetails.getByText(location)).toBeInTheDocument();
-  expect(profileDetails.getByText(blog)).toBeInTheDocument();
-  expect(profileDetails.getByText(blog)).toHaveAttribute('href', blog);
-  expect(profileDetails.getByText(twitterUsername)).toBeInTheDocument();
-  expect(profileDetails.getByText(twitterUsername)).toHaveAttribute(
+  expect(profileDetails.getByText(profileDetailsData.name)).toBeInTheDocument();
+  expect(
+    profileDetails.getByText(profileDetailsData.description)
+  ).toBeInTheDocument();
+  // expect(
+  //   profileDetails.getByText(profileDetailsData.location)
+  // ).toBeInTheDocument();
+  expect(profileDetails.getByText(profileDetailsData.blog)).toBeInTheDocument();
+  expect(profileDetails.getByText(profileDetailsData.blog)).toHaveAttribute(
     'href',
-    `https://twitter.com/${twitterUsername}`
+    profileDetailsData.blog
   );
-  expect(profileDetails.getByText(email)).toBeInTheDocument();
-  expect(profileDetails.getByText(email)).toHaveAttribute(
+  expect(
+    profileDetails.getByText(profileDetailsData.twitter_username)
+  ).toBeInTheDocument();
+  expect(
+    profileDetails.getByText(profileDetailsData.twitter_username)
+  ).toHaveAttribute(
     'href',
-    `mailto:${email}`
+    `https://twitter.com/${profileDetailsData.twitter_username}`
+  );
+  expect(
+    profileDetails.getByText(profileDetailsData.email)
+  ).toBeInTheDocument();
+  expect(profileDetails.getByText(profileDetailsData.email)).toHaveAttribute(
+    'href',
+    `mailto:${profileDetailsData.email}`
   );
 });
+
+export default profileDetailsData;

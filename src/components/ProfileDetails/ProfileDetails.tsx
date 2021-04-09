@@ -38,6 +38,7 @@ const ProfileDetails = (props: ProfileDetailsProps): JSX.Element => {
     email,
     isLoading,
   } = props;
+
   return (
     <Grid
       item

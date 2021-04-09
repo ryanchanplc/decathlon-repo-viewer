@@ -35,6 +35,7 @@ const CheckBoxFields = (props: CheckBoxFieldsProps): JSX.Element => {
       label: 'Private',
     },
   ];
+
   return (
     <Box justifyContent="flex-start" display="flex" flexDirection="row">
       {fieldsConfig.map((field) => {

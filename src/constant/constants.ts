@@ -27,7 +27,7 @@ export const SORT = {
   bestmatch: 'Bestmatch',
   stars: 'Stars',
   forks: 'Forks',
-  'help-wanted-issue': 'Issues',
+  'help-wanted-issue': 'Help Wanted Issue',
   updated: 'Updated',
 };
 

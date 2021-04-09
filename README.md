@@ -1,5 +1,7 @@
 #Introduction
 
+A Github repo viewer that fetch Decalthon 's github repo.
+
 #Quickstart
 Strongly recommend using yarn , due to babel-loader conflict between CRA and storybook
 
