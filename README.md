@@ -1,7 +1,8 @@
 # Introduction
 
 A Github repo viewer that fetch Decalthon 's github repo.
-#API SETTING
+
+# API SETTING
 
 ## TOKEN
 
